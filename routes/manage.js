@@ -10,7 +10,7 @@ module.exports = knex => {
   let rankData = [];
 
   // Manage created poll
-  router.get('/manage/:id', (req, res) => {
+  router.get('/:id', (req, res) => {
     let publicId = req.params.id;
     findPolls(publicId)
     .then(poll =>
@@ -51,8 +51,7 @@ function findPolls(publicId) {
 
   function findRanks(pollChoices) {
     pollChoices.forEach(choice => {
-      rankData.push(knex.select('*').from('poll_choices_votes').where('poll_choice_id', choice.id);)
-
+      rankData.push(knex.select('*').from('poll_choices_votes').where('poll_choice_id', choice.id);
     })
   }
 };
