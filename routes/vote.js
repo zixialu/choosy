@@ -11,7 +11,9 @@ module.exports = knex => {
   router.put('/vote/:id', (req, res) => {});
 
   // Redirect to '/'
-  router.get('/vote', (req, res) => {});
+  router.get('/vote', (req, res) => {
+    res.redirect('/');
+  });
 
   return router;
 };
