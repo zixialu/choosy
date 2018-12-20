@@ -14,9 +14,6 @@ const knex = require('knex')(knexConfig[ENV]);
 const morgan = require('morgan');
 const knexLogger = require('knex-logger');
 
-// Data helpers for interacting with db
-const DataHelpers = require('./lib/data-helpers.js')(knex);
-
 // Seperated Routes for each Resource
 const newPollRoutes = require('./routes/new-poll')(knex);
 const manageRoutes = require('./routes/manage')(knex);
