@@ -1,0 +1,27 @@
+body {
+  padding-top: 65px;
+}
+
+/* Customize container */
+@media (min-width: 768px) {
+  .container {
+    max-width: 730px;
+  }
+}
+
+.navbar-brand {
+  font-family: Merriweather, sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  font-size: 18pt;
+}
+
+.poll-prompt {
+  font-family: Merriweather, sans-serif;
+  font-weight: 900;
+  font-style: italic;
+}
+
+.list-group {
+  margin-top: 20px;
+}
