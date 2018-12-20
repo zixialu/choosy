@@ -7,7 +7,10 @@ const router = express.Router();
 
 module.exports = knex => {
   // GET poll creation page
-  router.get('/', (req, res) => {});
+  router.get('/', (req, res) => {
+    // TODO: Change the file path when it's made
+    res.render('index');
+  });
 
   // POST create new poll
   router.post('/', (req, res) => {
