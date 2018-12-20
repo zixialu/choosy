@@ -17,6 +17,7 @@ module.exports = knex => {
         findRanks(result[0])
       )
     );
+  //: add next steps after data collected from DB
   });
 
   // // POST edit poll
@@ -26,7 +27,9 @@ module.exports = knex => {
   // router.delete('/:id', (req, res) => {});
 
   // Redirect to '/'
-  router.get('/', (req, res) => {});
+  router.get('/', (req, res) => {
+    res.redirect('/');
+  });
 
   return router;
 
