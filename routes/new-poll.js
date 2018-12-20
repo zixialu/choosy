@@ -12,22 +12,58 @@ module.exports = knex => {
   // POST create new poll
   router.post('/', (req, res) => {
     // TODO: Generate/pull all poll parameters out from the request as follows:
+    // TODO: Refactor db interfacing logic out to a data-helpers function
+
     // Poller
     const pollerEmail = req.body.email;
-
-    // Poll
-    const prompt = req.body.prompt;
-    const createDate = Date();
-    // TODO: Stretch: set a close date if applicable
-    const closeDate = null;
-    const publicId = uuidv4();
-
     /*
-     * FIXME: Refactor pollers table in db to be primary keyed by email, so we
-     * don't have to do a lookup to find matching id or have multiple bogus entries
+     * TODO: Lookup pollers by email to see if pollers already exists, and use
+     * its id if it does; insert a new poller otherwise.
+     * Also update email column in pollers table to be indexed to facilitate
+     * fast frequent searching
      */
-    // TODO: Insert new poller, then poll, then choices
-    // TODO: Refactor helper functions out to a data-helpers file
+    // Insert new poller
+    knex('pollers')
+      .insert({
+        email: pollerEmail
+      })
+      .returning('*')
+      .then(poller => {
+        // Poll
+        const prompt = req.body.prompt;
+        const createDate = Date();
+        // TODO: Stretch: set a close date if applicable
+        const closeDate = null;
+        const publicId = uuidv4();
+
+        // Insert new poll
+        knex('polls')
+          .insert({
+            poller_id: poller.id,
+            prompt,
+            create_date: createDate,
+            close_date: closeDate,
+            public_id: publicId
+          })
+          .returning('*');
+      })
+      .then(poll => {
+        // Poll choices
+        // TODO: Implement this based on how choices are structured in the form
+        req.body.pollChoices.forEach(choice => {
+          const { title, description } = choice;
+
+          // Insert new poll choice
+          knex('poll_choices').insert({
+            poll_id: poll.id,
+            title,
+            description
+          });
+        });
+      })
+      .catch(err => {
+        // TODO: Catch errors
+      });
   });
 
   return router;
