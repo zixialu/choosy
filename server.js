@@ -15,7 +15,9 @@ const morgan = require('morgan');
 const knexLogger = require('knex-logger');
 
 // Seperated Routes for each Resource
-const choosyRoutes = require('./routes/choosy');
+const newPollRoutes = require('./routes/new-poll');
+const manageRoutes = require('./routes/manage');
+const voteRoutes = require('./routes/vote');
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -39,7 +41,9 @@ app.use(
 app.use(express.static('public'));
 
 // Mount all resource routes
-app.use('/', choosyRoutes(knex));
+app.use('/', newPollRoutes(knex));
+app.use('/manage', manageRoutes(knex));
+app.use('/vote', voteRoutes(knex));
 
 // Home page
 // app.get('/', (req, res) => {
