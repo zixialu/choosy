@@ -6,7 +6,7 @@ const router = express.Router();
 module.exports = knex => {
   // GET voting page
   // TODO: This uses ejs right now, decide whether to do it like this or use jquery instead
-  router.post('/vote/:id', (req, res) => {
+  router.post('/:id', (req, res) => {
     // TODO: Fill up template vars with poll data and choices data
     const pollId = req.params.id;
 
@@ -28,7 +28,7 @@ module.exports = knex => {
   });
 
   // PUT new vote
-  router.put('/vote/:id', (req, res) => {
+  router.put('/:id', (req, res) => {
     // TODO: Pull all vote parameters out from request body
     // Vote
     const pollId = req.body.pollId;
@@ -56,7 +56,7 @@ module.exports = knex => {
   });
 
   // Redirect to '/'
-  router.get('/vote', (req, res) => {
+  router.get('/', (req, res) => {
     res.redirect('/');
   });
 
