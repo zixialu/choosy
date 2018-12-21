@@ -68,21 +68,35 @@
       <div class="row justify-content-center">
         <section class="jumbotron">
           <h3 class="poll-prompt">What should we call the app?</h3>
-          <ul class="list-group">
-            <li class="list-group-item">choosy</li>
-            <li class="list-group-item">choosie</li>
-            <li class="list-group-item">choozy</li>
-            <li class="list-group-item">strawpoll</li>
+          <ul id="sortable" class="list-group">
+            <li class="list-group-item ui-state-default">
+              <h4>choosy</h4>
+              <section>Classic!</section>
+            </li>
+            <li class="list-group-item ui-state-default">
+              <h4>choosie</h4>
+              <section>Fun and bubbly!</section>
+            </li>
+            <li class="list-group-item ui-state-default">
+              <h4>choozy</h4>
+              <section>Zany and fun!</section>
+            </li>
+            <li class="list-group-item ui-state-default">
+              <h4>strawpoll</h4>
+              <section>Wait, this already exists!</section>
+            </li>
           </ul>
         </section>
       </div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script
       src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
       integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
       crossorigin="anonymous"
     ></script>
+    <script src="../public/scripts/app.js"></script>
   </body>
 </html>
