@@ -11,8 +11,7 @@ module.exports = knex => {
 
   // Manages initial GET request to /manage/:id
   router.get('/:id', (req, res) => {
-    let pollId = req.params.id;
-    res.render('manage', pollId)
+    res.render('manage')
   });
 
   //Manages AJAX GET request for data once document is ready
@@ -31,7 +30,7 @@ module.exports = knex => {
 
   // Redirect to '/'
   router.get('/', (req, res) => {
-    res.render('index');
+    res.render('index')
   });
 
   return router;
