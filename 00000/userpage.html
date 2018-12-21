@@ -5,12 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- dragable and sortable parts START -->
+<title>jQuery UI Sortable - Default functionality</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <style>
+  #sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+  #sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
+  #sortable li span { position: absolute; margin-left: -1.3em; }
+  </style>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#sortable" ).sortable();
+    $( "#sortable" ).disableSelection();
+  } );
+  </script>
+<!-- dragable and sortable parts END -->
+
     <title>Bootstrap 101 Template</title>
         <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans|Merriweather:400,900i"
       rel="stylesheet"/>
         <!-- Custom override -->
-    <link href="styles/1.css" rel="stylesheet" />
+    <link href="styles/pollerpage.css" rel="stylesheet" />
 
     <!-- Bootstrap -->
     <!-- Latest compiled and minified CSS -->
@@ -28,15 +48,9 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-<!-- APP JS -->
-<script type="text/javascript" src="../../scripts/app.js"></script>
-
   </head>
 
-  <header>
-          <li>Hello, <%= user.email %></li>
 
-  </header>
   <body style="margin-top: 0px">
 
 
@@ -80,52 +94,42 @@
 <!---------------------- BODT END --------------------->
 <!-------------------------- Jumbotron  START --------------->
 <div class="jumbotron">
-    <div class="container">
-    <div class="input-group-lg">
-  <span class="input-group-addon" id="basic-addon1">TOPIC</span>
-  <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
-</div>
-<br/>
-<div class="input-group">
-  <span class="input-group-addon" id="basic-addon1">OPTION</span>
-  <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
-</div>
-<br/>
-<div class="input-group">
-  <span class="input-group-addon" id="basic-addon1">OPTION</span>
-  <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
-</div>
-<br/>
-<div class="input-group">
-  <span class="input-group-addon" id="basic-addon1">OPTION</span>
-  <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
-</div>
-<br/>
-<div class="input-group">
-  <span class="input-group-addon" id="basic-addon1">OPTION</span>
-  <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
-</div>
-<br/>
-<div class="input-group">
-  <span class="input-group-addon" id="basic-addon1">OPTION</span>
-  <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
-</div>
+ <main class="container">
+        <section id="new-poll" class="container">
+          <form id="create-poll" method="POST" action="/poll">
+            <h1>So, what is your decision?</h1>
+             <br/>
+              <br/>
+<ul id="sortable">
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</li>
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4</li>
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5</li>
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</li>
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>
+</ul>
+
+
+            <br/>
+
+            <br/>
+            <div class="form-button">
+              <button type="submit" class="btn btn-primary btn-lg" href="#">Submit</button>
+            </div>
+          </form>
+        </section>
+      </main>
 
 
 </div>
-</div>
 
-
-
-<div class="container">
-<a id="create-poll" class="btn btn-primary btn-lg" href="#" role="button" >submit</a>
-</div>
 
 
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </body>

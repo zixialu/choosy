@@ -1,0 +1,51 @@
+/* Customize container */
+@media (min-width: 768px) {
+  .container {
+    max-width: 730px;
+  }
+}
+
+body {
+  /* width: 100%; */
+  /* min-width: 810px; */
+  /* height: 100%;
+  min-height: 600px; */
+
+  /* max-width: 1350px; */
+  /* width: expression_r(
+    Math.max(1000, Math.min(1200, document.body.offsetWidth * 0.99)) + 'px'
+  ); */
+
+  /* margin-top: 0px;
+  min-width: 700px;
+  margin: 0 auto; */
+  padding-top: 65px;
+}
+
+.navbar-brand {
+  font-family: Merriweather, sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  font-size: 18pt;
+}
+
+.poll-prompt {
+  font-family: Merriweather, sans-serif;
+  font-weight: 900;
+  font-style: italic;
+}
+
+.list-group {
+  margin-top: 20px;
+}
+
+#sharelink {
+  padding: 5px 8px;
+  font-size: 15px;
+  line-height: 1.3333333;
+  border-radius: 6px;
+}
+
+#create-poll input {
+  margin-top: 1em;
+}
