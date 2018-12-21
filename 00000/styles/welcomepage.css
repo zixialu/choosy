@@ -1,0 +1,25 @@
+
+
+body#welcomepage {
+   background-image: url(file:///home/edward/lighthouse/MID-TERM/choosy/00000/styles/welcomeBackground.jpg);
+    text-align: center;
+    margin-top: 150px;
+}
+
+
+#welcome {
+    color: black;
+    font-weight: 1000;
+    font-size:15em;
+    margin: 0em;
+  }
+
+#brand {
+    color:black;
+    font-weight: 500;
+    font-size: 7em;
+    margin-top: 1em;
+    padding-bottom: 0.5em;
+  }
+
+
