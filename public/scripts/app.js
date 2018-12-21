@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(function() {
 
   //Ajax POST request on form submit on main page.
   let $newpoll = $('#create-poll'); //important: confirm id against html file
@@ -8,16 +8,19 @@ $(document).ready(function() {
     //TO DO: create helper function to validate submission
     let formData = $newpoll.serialize();
 
-    console.log(formData);
-
-    // $.post('/', formData, function (data, status) {
+    $.post('/', formData, function (data, status) {
+      // console.log("data that comes back from post request", data);
     //   let pollId = ***;
     //   //TO DO: figure out how to get pollID from data sent back by POST req
     //   //TO DO: figure out how to hash pollID
     //   res.redirect('/manage/:pollId');
-    // });
+    });
   })
+
+  console.log('Test');
 })
+
+
 
 
 //   // Drag and drop list
