@@ -6,13 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>choosy</title>
+
     <!-- Google Fonts -->
     <link
       href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700|Merriweather:400,900i"
       rel="stylesheet"
     />
-    <!-- Custom override -->
-    <link href="styles/pollerpage.css" rel="stylesheet" />
 
     <!-- Bootstrap -->
     <!-- Latest compiled and minified CSS -->
@@ -23,28 +22,30 @@
       crossorigin="anonymous"
     />
 
-    <!-- Optional theme -->
+    <!-- Optional Bootstrap theme -->
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
       integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
       crossorigin="anonymous"
     />
+
+    <!-- Custom override -->
+    <link href="styles/pollerpage.css" rel="stylesheet" />
   </head>
 
   <body>
-    <!-------------------- BODY START -------------->
-
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
+          <!-- Navbar hamburger -->
           <button
             type="button"
             class="navbar-toggle collapsed"
             data-toggle="collapse"
-            data-target="#bs-example-navbar-collapse-1"
+            data-target="#navbar"
             aria-expanded="false"
+            aria-controls="navbar"
           >
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span> <span class="icon-bar"></span>
@@ -54,20 +55,8 @@
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse" id="navbar">
           <ul class="nav navbar-nav navbar-right">
-            <li>
-              <input type="text" value="Hello World" id="myInput" />
-              <button id="sharelink" onclick="myFunction()">Share Link</button>
-              <script>
-                function myFunction() {
-                  var copyText = document.getElementById('myInput');
-                  copyText.select();
-                  document.execCommand('copy');
-                  alert('Copied the text: ' + copyText.value);
-                }
-              </script>
-            </li>
             <li class="dropdown">
               <a
                 href="#"
@@ -92,148 +81,68 @@
       </div>
     </nav>
 
-    <!---------------------- BODT END --------------------->
     <!-------------------------- Jumbotron  START --------------->
-    <div class="jumbotron">
-      <main class="container">
-        <section id="new-poll" class="container">
-          <form id="create-poll" method="POST" action="/poll">
-            <h1>So, what are you trying to decide?</h1>
-            <div class="form-group">
-              <input
-                type="text"
-                id="form_pollname"
-                name="title"
-                class="form-control"
-                placeholder="POLL NAME "
-              />
-            </div>
-            <div><h2 id="optioninfo">Provide Options:</h2></div>
-            <div id="op1" class="form-group">
-              <input
-                id="op1a"
-                type="text"
-                class="form-option form-control"
-                name="option_1"
-                placeholder="Option 1"
-              />
-              <input
-                id="op1b"
-                type="text"
-                class="form-desc form-control"
-                name="option_1_desc"
-                placeholder="Description"
-              />
-            </div>
-            <br />
-            <div id="op2" class="form-group">
-              <input
-                id="op2a"
-                type="text"
-                class="form-option form-control"
-                name="option_2"
-                placeholder="Option 2"
-              />
-              <input
-                id="op2b"
-                type="text"
-                class="form-desc form-control"
-                name="option_2_desc"
-                placeholder="Description"
-              />
-            </div>
-            <br />
-            <div id="op3" class="form-group">
-              <input
-                id="op3a"
-                type="text"
-                class="form-option form-control"
-                name="option_3"
-                placeholder="Option 3"
-              />
-              <input
-                id="op3b"
-                type="text"
-                class="form-desc form-control"
-                name="option_3_desc"
-                placeholder="Description"
-              />
-            </div>
-            <br />
-            <div id="op4" class="form-group">
-              <input
-                id="op4a"
-                type="text"
-                class="form-option form-control"
-                name="option_4"
-                placeholder="Option 4"
-              />
-              <input
-                id="op4b"
-                type="text"
-                class="form-desc form-control"
-                name="option_4_desc"
-                placeholder="Description"
-              />
-            </div>
-            <br />
-            <div id="op5" class="form-group">
-              <input
-                id="op5a"
-                type="text"
-                class="form-option form-control"
-                name="option_5"
-                placeholder="Option 5"
-              />
-              <input
-                id="op5b"
-                type="text"
-                class="form-desc form-control"
-                name="option_5_desc"
-                placeholder="Description"
-              />
-            </div>
-            <br />
-
-            <!-- tell us something about you start -->
-
-            <div id="divpollerinfo" class="form-group">
-              <h2 id="h2pollerinfo">tell us something about you:</h2>
-              <input
-                id="info1"
-                type="text"
-                class="form-option form-control"
-                name="First Name"
-                placeholder="First Name"
-              />
-              <input
-                id="info2"
-                type="text"
-                class="form-desc form-control"
-                name="Last Name"
-                placeholder="Last Name"
-              />
-              <input
-                id="info3"
-                type="text"
-                class="form-desc form-control"
-                name="Email"
-                placeholder="Email"
-              />
-            </div>
-
-            <!-- tell us something about you end -->
-
-            <br />
-            <div class="form-button">
-              <button type="submit" class="btn btn-primary btn-lg" href="#">
-                Create Poll
-              </button>
-            </div>
-          </form>
-        </section>
-      </main>
-    </div>
+    <main class="container">
+      <section class="jumbotron">
+        <form id="create-poll" method="POST" action="/">
+          <h1>So, what are you trying to decide?</h1>
+          <input
+            type="email"
+            class="form-control"
+            name="email"
+            placeholder="Email"
+          />
+          <input
+            type="text"
+            name="prompt"
+            class="form-control"
+            placeholder="Prompt"
+          />
+          <h2 id="optioninfo">Provide Options:</h2>
+          <input
+            type="text"
+            class="form-control"
+            name="title1"
+            placeholder="Option 1"
+          />
+          <input
+            type="text"
+            class="form-control"
+            name="desc1"
+            placeholder="Description"
+          />
+          <input
+            type="text"
+            class="form-control"
+            name="title2"
+            placeholder="Option 2"
+          />
+          <input
+            type="text"
+            class="form-control"
+            name="desc2"
+            placeholder="Description"
+          />
+          <input
+            type="text"
+            class="form-control"
+            name="title3"
+            placeholder="Option 3"
+          />
+          <input
+            type="text"
+            class="form-control"
+            name="desc3"
+            placeholder="Description"
+          />
+          <input
+            type="submit"
+            class="btn btn-primary btn-lg"
+            value="Create Poll"
+          />
+        </form>
+      </section>
+    </main>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
