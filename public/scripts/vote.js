@@ -51,7 +51,8 @@ $(document).ready(function() {
       });
     });
 
-    // TODO: Make the route and ajax request to submit the vote
+    // TODO: Validation
+    // TODO: Serialize the data?
     $.put(`/vote/${pollId}`, pollChoices, () => {
       // TODO: Implement callback for after form is posted
     });
