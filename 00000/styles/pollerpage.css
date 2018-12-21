@@ -49,3 +49,7 @@ body {
 #create-poll input {
   margin-top: 1em;
 }
+
+.input-group {
+  width: 100%;
+}
