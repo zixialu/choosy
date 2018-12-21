@@ -1,0 +1,149 @@
+
+body{
+     width : 100%;
+      min-width: 810px;
+      height: 100%;
+      min-height: 600px;
+
+max-width:1350px;
+width:expression_r( Math.max(1000, Math.min(1200, document.body.offsetWidth*0.99))+"px" );
+}
+
+
+.navbar-brand {
+  font-family: Merriweather, sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  font-size: 18pt;
+}
+
+.poll-prompt {
+  font-family: Merriweather, sans-serif;
+  font-weight: 900;
+  font-style: italic;
+}
+
+.list-group {
+  margin-top: 20px;
+}
+
+
+
+#sharelink{
+    padding: 5px 8px;
+    font-size: 15px;
+    line-height: 1.3333333;
+    border-radius: 6px;
+
+};
+
+
+
+.jumbotron{
+
+width:50%;
+margin-left:auto;
+margin-right:auto;
+
+}
+div #op1{
+  margin-top: 30px;
+}
+
+div #op2{
+  margin-top: 30px;
+}
+
+div #op3{
+  margin-top: 30px;
+}
+div #op4{
+  margin-top: 30px;
+}
+
+div #op5{
+  margin-top: 30px;
+}
+
+
+
+
+div #op1a{
+  width: 350px;
+  float: left;
+
+}
+
+div #op1b{
+  margin-left: 50px  ;
+    width: 350px;
+  float: left;
+
+}
+div #op2a{
+
+  width: 350px;
+  float: left;
+}
+div #op2b{
+
+  width: 350px;
+  float: left;
+   margin-left: 50px
+}
+div #op3a{
+  width: 350px;
+  float: left;
+}
+div #op3b{
+  width: 350px;
+  float: left;
+   margin-left: 50px
+}
+div #op4a{
+  width: 350px;
+  float: left;
+}
+div #op4b{
+  width: 350px;
+  float: left;
+   margin-left: 50px
+}
+
+div #op5a{
+  width: 350px;
+  float: left;
+}
+div #op5b{
+  width: 350px;
+  float: left;
+   margin-left: 50px;
+}
+
+div #divpollerinfo{
+ margin-top: 100px;
+}
+
+#info1{
+width: 100px;
+float: left;
+
+}
+#info2{
+width: 100px;
+float: left;
+margin-left: 50px;
+}
+
+#info3{
+width: 350px;
+float: left;
+margin-left: 50px;
+}
+
+
+
+
+.form-button{
+  margin-top: 50px
+}
