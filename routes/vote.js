@@ -45,7 +45,7 @@ module.exports = knex => {
         // Poll choices/votes join table
         // TODO: Insert each choice rank into poll_choices_votes
         req.body.pollChoices.forEach(choice => {
-          const { rank, choiceId } = choice;
+          const { choiceId, rank } = choice;
           knex('poll_choices_votes').insert({
             vote_id: vote.id,
             poll_choice_id: choiceId,
