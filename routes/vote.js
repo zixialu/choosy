@@ -46,7 +46,7 @@ module.exports = knex => {
   router.put('/:id', (req, res) => {
     // TODO: Pull all vote parameters out from request body
     // Vote
-    const pollId = req.body.pollId;
+    const pollId = req.params.pollId;
     const voteDate = Date();
 
     // Insert new vote
@@ -60,7 +60,7 @@ module.exports = knex => {
         // Poll choices/votes join table
         // TODO: Insert each choice rank into poll_choices_votes
         req.body.pollChoices.forEach(choice => {
-          const { rank, choiceId } = choice;
+          const { choiceId, rank } = choice;
           knex('poll_choices_votes').insert({
             vote_id: vote.id,
             poll_choice_id: choiceId,

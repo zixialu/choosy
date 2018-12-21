@@ -23,6 +23,7 @@ $(function() {
 
 
 
+
 //   // Drag and drop list
 //   $('#sortable').sortable({
 //     // axis: 'y',
@@ -46,5 +47,4 @@ $(function() {
 //       $("<div>").text(user.name).appendTo($("body"));
 //     }
 //   });;
-//
 
