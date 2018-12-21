@@ -16,8 +16,10 @@ $(() => {
     containment: 'parent',
     cursor: 'move',
     distance: 5,
-    revert: true,
+    // This blocks arranging while it drifts; remove for UX reasons?
+    // revert: true,
+    // This can get buggy if elements are different sizes
     tolerance: 'pointer'
   });
-  // $('#sortable').disableSelection();
+  $('#sortable').disableSelection();
 });
