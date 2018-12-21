@@ -9,8 +9,14 @@ module.exports = knex => {
   let votesData = [];
   let rankData = [];
 
-  // Manage created poll
+  // Manages initial GET request to /manage/:id
   router.get('/:id', (req, res) => {
+    let publicId = req.params.id;
+    res.render('manage', publicId)
+  });
+
+  //Manages AJAX GET request for data once document is ready
+  router.get('/api/:id', (req, res) => {
     let publicId = req.params.id;
     findPolls(publicId).then(poll =>
       Promise.all([findPollChoices(poll), findVotes(poll)]).then(result =>
