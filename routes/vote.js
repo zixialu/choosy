@@ -31,6 +31,7 @@ module.exports = knex => {
   router.put('/:id', (req, res) => {
     // TODO: Pull all vote parameters out from request body
     // Vote
+    // FIXME: Replace with req.params.id, remove from object construction
     const pollId = req.body.pollId;
     const voteDate = Date();
 

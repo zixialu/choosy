@@ -36,12 +36,10 @@ $(document).ready(function() {
     .data('choiceId', 3);
 
   $submitVote.on('click', () => {
-    // TODO: Form the ajax body
-    // pollId
+    // Form the AJAX body
     // TODO: put the pollId into submit's data tag when page is loaded
     const pollId = $submitVote.data('pollId');
-    // pollChoices { rank, choiceId }
-    // TODO: Make the route and ajax request to submit the vote
+
     const $choiceElements = $('#sortable').children();
     const pollChoices = [];
     $choiceElements.forEach((choice, index) => {
@@ -51,6 +49,11 @@ $(document).ready(function() {
         // FIXME: Reverse this number, maybe? Depending on how we process this?
         rank: index
       });
+    });
+
+    // TODO: Make the route and ajax request to submit the vote
+    $.put(`/vote/${pollId}`, { pollId, pollChoices }, () => {
+      // TODO: Implement callback for after form is posted
     });
   });
 });
