@@ -1,5 +1,3 @@
-
-
 $(document).ready(function() {
 
   //Ajax POST request on form submit on main page.
