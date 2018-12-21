@@ -11,18 +11,15 @@ module.exports = knex => {
 
   // Manages initial GET request to /manage/:id
   router.get('/:id', (req, res) => {
-    let publicId = req.params.id;
-    res.render('manage', publicId)
+    let pollId = req.params.id;
+    res.render('manage', pollId)
   });
 
   //Manages AJAX GET request for data once document is ready
   router.get('/api/:id', (req, res) => {
-    let publicId = req.params.id;
-    findPolls(publicId).then(poll =>
-      Promise.all([findPollChoices(poll), findVotes(poll)]).then(result =>
-        findRanks(result[0])
-      )
-    );
+    let pollId = req.params.id;
+    Promise.all([findPolls(pollId), findPollChoices(pollId), findVotes(pollId)])
+    .then(result => findRanks(result[1]))
   //: add next steps after data collected from DB
   });
 
@@ -34,32 +31,32 @@ module.exports = knex => {
 
   // Redirect to '/'
   router.get('/', (req, res) => {
-    res.redirect('/');
+    res.render('index');
   });
 
   return router;
 
-  function findPolls(publicId) {
+  function findPolls(pollId) {
     pollData = knex
       .first('*')
       .from('polls')
-      .where('public_id', publicId);
+      .where('id', pollId);
     return pollData;
   }
 
-  function findPollChoices(poll) {
+  function findPollChoices(pollId) {
     choicesData = knex
       .select('*')
       .from('poll_choices')
-      .where('poll_id', poll.id);
+      .where('poll_id', pollId);
     return choicesData;
   }
 
-  function findVotes(poll) {
+  function findVotes(pollId) {
     votesData = knex
       .select('*')
       .from('votes')
-      .where('poll_id', poll.id);
+      .where('poll_id', pollId);
     return votesData;
   }
 
