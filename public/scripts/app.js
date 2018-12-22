@@ -27,7 +27,7 @@ $(function() {
   const $pollChoices = $('#poll-choices');
 
   $pollChoices.on('keyup', event => {
-    console.log('Poll choices on change');
+    console.log('Poll choices on keyup');
     // On change of last input group, make a new input group
     const $lastChoiceGroup = $pollChoices.children().last();
 
