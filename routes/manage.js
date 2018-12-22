@@ -106,7 +106,7 @@ module.exports = knex => {
       return knex
         .sum('rank')
         .from('poll_choices_votes')
-        .where('poll_choice_id', pollChoices[x].id);
+        .where('poll_choice_id', choice.id);
     });
 
     // Process all the promises in parallel, then handle the result
