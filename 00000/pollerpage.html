@@ -108,68 +108,26 @@
 
           <h2 id="optioninfo">Provide Options:</h2>
 
-          <div class="input-group">
-            <span class="input-group-addon"
-              ><span
-                class="
-              glyphicon glyphicon-menu-right"
-              ></span
-            ></span>
-            <input
-              type="text"
-              class="form-control"
-              name="title1"
-              placeholder="Option"
-            />
-            <input
-              type="text"
-              class="form-control"
-              name="desc1"
-              placeholder="Description"
-            />
-          </div>
-
-          <div class="input-group">
-            <span class="input-group-addon"
-              ><span
-                class="
-                glyphicon glyphicon-menu-right"
-              ></span
-            ></span>
-            <input
-              type="text"
-              class="form-control"
-              name="title2"
-              placeholder="Option"
-            />
-            <input
-              type="text"
-              class="form-control"
-              name="desc2"
-              placeholder="Description"
-            />
-          </div>
-
-          <div class="input-group">
-            <span class="input-group-addon"
-              ><span
-                class="
-                glyphicon glyphicon-menu-right"
-              ></span
-            ></span>
-            <input
-              type="text"
-              class="form-control"
-              name="title3"
-              placeholder="Option"
-            />
-            <input
-              type="text"
-              class="form-control"
-              name="desc3"
-              placeholder="Description"
-            />
-          </div>
+          <!-- TODO: Change input group addon to a delete button -->
+          <section id="poll-choices">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-menu-right"></span>
+              </span>
+              <input
+                type="text"
+                class="form-control choice-title"
+                name="title1"
+                placeholder="Option"
+              />
+              <input
+                type="text"
+                class="form-control choice-description"
+                name="desc1"
+                placeholder="Description"
+              />
+            </div>
+          </section>
           <input
             type="submit"
             value="Create Poll"
