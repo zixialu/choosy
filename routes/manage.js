@@ -113,7 +113,8 @@ module.exports = knex => {
     Promise.all(rankSumsKnexPromises)
       .then((result) => {
         // TODO: Handle the results - Push things to ranksData
-        /* ranksData may need to be an object keyed to choiceId? Elements may be
+        /*
+         * ranksData may need to be an object keyed to choiceId? Elements may be
          * pushed in random order because of the parallel nature of Promise.all
          */
         console.log('Rank Promise.all array returns ' + result);
