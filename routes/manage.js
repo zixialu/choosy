@@ -110,15 +110,14 @@ module.exports = knex => {
     });
 
     // Process all the promises in parallel, then handle the result
-    Promise.all(rankSumsKnexPromises)
-      .then((result) => {
-        // TODO: Handle the results - Push things to ranksData
-        /*
-         * ranksData may need to be an object keyed to choiceId? Elements may be
-         * pushed in random order because of the parallel nature of Promise.all
-         */
-        console.log('Rank Promise.all array returns ' + result);
-      })
+    Promise.all(rankSumsKnexPromises).then(result => {
+      // TODO: Handle the results - Push things to ranksData
+      /*
+       * ranksData may need to be an object keyed to choiceId? Elements may be
+       * pushed in random order because of the parallel nature of Promise.all
+       */
+      console.log('Rank Promise.all array returns ' + result);
+    });
 
     // for (let x = 0; x < pollChoices.length; x++) {
     //   return knex
@@ -128,22 +127,22 @@ module.exports = knex => {
     //     .then(result => {
     //       return parseInt(result[0].sum);
     //     });
-      ranksData[pollChoices[x].id] = testVar;
-    }
-
-    console.log('ranksData', ranksData);
-    // console.log("this is the rank outside the for loop", rank)
-    // return rank;
+    ranksData[pollChoices[x].id] = testVar;
   }
 
-  // pollChoices.foreEach(choice => {
-  //   return knex
-  //     .sum('rank')
-  //     .from('poll_choices_votes')
-  //     .where('poll_choice_id', choice.id)
-  //     .then(result => {
-  //       ranksData[choice] = result;
-  //     })  // .returning('*')
-  // });
-  // }
+  console.log('ranksData', ranksData);
+  // console.log("this is the rank outside the for loop", rank)
+  // return rank;
 };
+
+// pollChoices.foreEach(choice => {
+//   return knex
+//     .sum('rank')
+//     .from('poll_choices_votes')
+//     .where('poll_choice_id', choice.id)
+//     .then(result => {
+//       ranksData[choice] = result;
+//     })  // .returning('*')
+// });
+// }
+// };
