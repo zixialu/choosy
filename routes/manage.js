@@ -113,6 +113,7 @@ module.exports = knex => {
     Promise.all(rankSumsKnexPromises)
       .then((result) => {
         // TODO: Handle the results
+        console.log('Rank Promise.all array returns ' + result);
       })
 
     // for (let x = 0; x < pollChoices.length; x++) {
