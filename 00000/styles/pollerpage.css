@@ -20,6 +20,7 @@ body {
   min-width: 700px;
   margin: 0 auto; */
   padding-top: 65px;
+  font-family: 'Merriweather Sans', sans-serif;
 }
 
 .navbar-brand {
@@ -46,6 +47,18 @@ body {
   border-radius: 6px;
 }
 
-#create-poll input {
-  margin-top: 1em;
+.input-group {
+  width: 100%;
+  padding-bottom: 2em;
+}
+
+#create-poll h1 {
+  font-family: Merriweather, sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  margin-top: 0;
+  margin-bottom: 30px;
+}
+.choose-style {
+  color: #e74c3c;
 }

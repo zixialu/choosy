@@ -85,60 +85,95 @@
     <main class="container">
       <section class="jumbotron">
         <form id="create-poll" method="POST" action="/">
-          <h1>So, what are you trying to decide?</h1>
-          <input
-            type="email"
-            class="form-control"
-            name="email"
-            placeholder="Email"
-          />
+          <h1>
+            What are you feeling <i class="choose-style">choosy</i> about?
+          </h1>
+          <div class="input-group">
+            <span class="input-group-addon"
+              ><span class="glyphicon glyphicon-envelope"></span
+            ></span>
+            <input
+              type="email"
+              class="form-control"
+              name="email"
+              placeholder="Email"
+            />
+          </div>
           <input
             type="text"
             name="prompt"
             class="form-control"
             placeholder="Prompt"
           />
+
           <h2 id="optioninfo">Provide Options:</h2>
-          <input
-            type="text"
-            class="form-control"
-            name="title1"
-            placeholder="Option 1"
-          />
-          <input
-            type="text"
-            class="form-control"
-            name="desc1"
-            placeholder="Description"
-          />
-          <input
-            type="text"
-            class="form-control"
-            name="title2"
-            placeholder="Option 2"
-          />
-          <input
-            type="text"
-            class="form-control"
-            name="desc2"
-            placeholder="Description"
-          />
-          <input
-            type="text"
-            class="form-control"
-            name="title3"
-            placeholder="Option 3"
-          />
-          <input
-            type="text"
-            class="form-control"
-            name="desc3"
-            placeholder="Description"
-          />
+
+          <div class="input-group">
+            <span class="input-group-addon"
+              ><span
+                class="
+              glyphicon glyphicon-menu-right"
+              ></span
+            ></span>
+            <input
+              type="text"
+              class="form-control"
+              name="title1"
+              placeholder="Option"
+            />
+            <input
+              type="text"
+              class="form-control"
+              name="desc1"
+              placeholder="Description"
+            />
+          </div>
+
+          <div class="input-group">
+            <span class="input-group-addon"
+              ><span
+                class="
+                glyphicon glyphicon-menu-right"
+              ></span
+            ></span>
+            <input
+              type="text"
+              class="form-control"
+              name="title2"
+              placeholder="Option"
+            />
+            <input
+              type="text"
+              class="form-control"
+              name="desc2"
+              placeholder="Description"
+            />
+          </div>
+
+          <div class="input-group">
+            <span class="input-group-addon"
+              ><span
+                class="
+                glyphicon glyphicon-menu-right"
+              ></span
+            ></span>
+            <input
+              type="text"
+              class="form-control"
+              name="title3"
+              placeholder="Option"
+            />
+            <input
+              type="text"
+              class="form-control"
+              name="desc3"
+              placeholder="Description"
+            />
+          </div>
           <input
             type="submit"
-            class="btn btn-primary btn-lg"
             value="Create Poll"
+            class="btn btn-primary btn-lg"
           />
         </form>
       </section>
