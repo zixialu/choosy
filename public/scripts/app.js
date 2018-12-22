@@ -19,16 +19,15 @@ $(function() {
   });
 
   /*
-   * The next two event listeners watch for interaction with the last choice
-   * input group, to add a new one or remove an empty one as needed. A new group
-   * should be appended if the user begins to fill data into the last group, and
-   * the last group should be removed if there is more than one empty group at
-   * the bottom ready to be filled in (there should always be exactly one empty
-   * group at the bottom of the form)
+   * The next event listener watch for interaction with the last choice input
+   * group, to add a new one as needed. A new group
+   * should be appended if the user begins to fill data into the last group
+   * (there should always be at least one empty group at the bottom of the form)
    */
   const $pollChoices = $('#poll-choices');
 
-  $pollChoices.on('change', event => {
+  $pollChoices.on('keyup', event => {
+    console.log('Poll choices on change');
     // On change of last input group, make a new input group
     const $lastChoiceGroup = $pollChoices.children().last();
 
@@ -37,15 +36,6 @@ $(function() {
       // Append a new input group
       // TODO: Increment this number for every new input group
       $pollChoices.append(createChoiceGroup(1));
-    }
-  });
-
-  $pollChoices.on('blur', event => {
-    // TODO: On blur of last input group, remove all but one empty input group
-    const $lastChoiceGroup = $pollChoices.children().last();
-    if (!getTitleValue($lastChoiceGroup)) {
-      // TODO: Remove all but one empty input group? Is this extra logic needed?
-      $lastChoiceGroup.remove();
     }
   });
 });
