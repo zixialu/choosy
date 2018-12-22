@@ -1,18 +1,20 @@
-"use strict";
+// //TO DO: DELETE THIS FILE UPON COMPLETION
 
-const express = require('express');
-const router  = express.Router();
+// "use strict";
 
-module.exports = (knex) => {
+// const express = require('express');
+// const router  = express.Router();
 
-  router.get("/", (req, res) => {
-    knex
-      .select("*")
-      .from("users")
-      .then((results) => {
-        res.json(results);
-    });
-  });
+// module.exports = (knex) => {
 
-  return router;
-}
+//   router.get("/", (req, res) => {
+//     knex
+//       .select("*")
+//       .from("users")
+//       .then((results) => {
+//         res.json(results);
+//     });
+//   });
+
+//   return router;
+// }

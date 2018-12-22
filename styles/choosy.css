@@ -9,6 +9,10 @@ body {
   }
 }
 
+body {
+  font-family: 'Merriweather sans', sans-serif;
+}
+
 .navbar-brand {
   font-family: Merriweather, sans-serif;
   font-weight: 900;
@@ -24,4 +28,12 @@ body {
 
 .list-group {
   margin-top: 20px;
+}
+
+#sortable h4 {
+  font-weight: 700;
+}
+
+#sortable section {
+  font-style: italic;
 }

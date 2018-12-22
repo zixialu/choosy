@@ -4,34 +4,49 @@ const express = require('express');
 const router = express.Router();
 
 module.exports = knex => {
-  // GET voting page
+
+  let pollData;
+  let choicesData = [];
+
+
+  //Manages initial GET request to /vote/:id
   // TODO: This uses ejs right now, decide whether to do it like this or use jquery instead
-  router.post('/:id', (req, res) => {
-    // TODO: Fill up template vars with poll data and choices data
-    const pollId = req.params.id;
+  router.get('/:id', (req, res) => {
+    res.render('vote')
+  });
 
-    // Get the poll from db
-    const poll = knex('polls')
-      .first()
-      .where({ id: pollId });
+  //Manages AJAX GET request for data once document is ready
+  router.get('/api/:id', (req, res) => {
+    let publicId = req.params.id;
 
-    const choices = knex('poll_choices')
-      .select()
-      .where({ poll_id: pollId });
+    findPoll(publicId)
+    .then((poll) => findChoices(poll))
 
-    const templateVars = {
-      poll,
-      choices
-    };
-    // TODO: Change this path once it's created
-    res.render('vote', templateVars);
+
+    //TODO: render the vote form
+
+    // // Get the poll from db
+    // const poll = knex('polls')
+    //   .first()
+    //   .where({ id: pollId });
+
+    // const choices = knex('poll_choices')
+    //   .select()
+    //   .where({ poll_id: pollId });
+
+    // const templateVars = {
+    //   poll,
+    //   choices
+    // };
+    // // TODO: Change this path once it's created
+    // res.render('vote', templateVars);
   });
 
   // PUT new vote
   router.put('/:id', (req, res) => {
     // TODO: Pull all vote parameters out from request body
     // Vote
-    const pollId = req.body.pollId;
+    const pollId = req.params.pollId;
     const voteDate = Date();
 
     // Insert new vote
@@ -45,7 +60,7 @@ module.exports = knex => {
         // Poll choices/votes join table
         // TODO: Insert each choice rank into poll_choices_votes
         req.body.pollChoices.forEach(choice => {
-          const { rank, choiceId } = choice;
+          const { choiceId, rank } = choice;
           knex('poll_choices_votes').insert({
             vote_id: vote.id,
             poll_choice_id: choiceId,
@@ -57,8 +72,26 @@ module.exports = knex => {
 
   // Redirect to '/'
   router.get('/', (req, res) => {
-    res.redirect('/');
+    res.render('index');
   });
 
   return router;
+
+  function findPoll(publicId) {
+    pollData = knex
+    .first('*')
+    .from('polls')
+    .where('public_id', publicId)
+
+    return pollData;
+  }
+
+  function findPollChoices(poll) {
+    choicesData = knex
+    .select('*')
+    .from('poll_choices')
+    .where('poll_id', poll.id)
+
+    return choicesData;
+  }
 };

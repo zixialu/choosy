@@ -41,9 +41,9 @@ app.use(
 app.use(express.static('public'));
 
 // Mount all resource routes
-app.use('/', newPollRoutes(knex));
-app.use('/manage', manageRoutes(knex));
-app.use('/vote', voteRoutes(knex));
+app.use('/', newPollRoutes);
+app.use('/manage', manageRoutes);
+app.use('/vote', voteRoutes);
 
 // Home page
 // app.get('/', (req, res) => {

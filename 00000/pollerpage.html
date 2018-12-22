@@ -9,7 +9,7 @@
 
     <!-- Google Fonts -->
     <link
-      href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700|Merriweather:400,900i"
+      href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700|Merriweather:400,400i,900i"
       rel="stylesheet"
     />
 
@@ -85,60 +85,75 @@
     <main class="container">
       <section class="jumbotron">
         <form id="create-poll" method="POST" action="/">
-          <h1>So, what are you trying to decide?</h1>
-          <input
-            type="email"
-            class="form-control"
-            name="email"
-            placeholder="Email"
-          />
+          <h1>
+            What are you feeling <i class="choose-style">choosy</i> about?
+          </h1>
+
+          <!-- Email and Prompt -->
+          <div class="input-group">
+            <span class="input-group-addon"
+              ><span class="glyphicon glyphicon-envelope"></span
+            ></span>
+            <input
+              type="email"
+              class="form-control"
+              name="email"
+              placeholder="Email"
+            />
+          </div>
           <input
             type="text"
             name="prompt"
             class="form-control"
             placeholder="Prompt"
           />
-          <h2 id="optioninfo">Provide Options:</h2>
-          <input
-            type="text"
-            class="form-control"
-            name="title1"
-            placeholder="Option 1"
-          />
-          <input
-            type="text"
-            class="form-control"
-            name="desc1"
-            placeholder="Description"
-          />
-          <input
-            type="text"
-            class="form-control"
-            name="title2"
-            placeholder="Option 2"
-          />
-          <input
-            type="text"
-            class="form-control"
-            name="desc2"
-            placeholder="Description"
-          />
-          <input
-            type="text"
-            class="form-control"
-            name="title3"
-            placeholder="Option 3"
-          />
-          <input
-            type="text"
-            class="form-control"
-            name="desc3"
-            placeholder="Description"
-          />
+
+          <h3 id="optioninfo">Give us some choices:</h3>
+
+          <!-- Poll Choices -->
+          <!-- TODO: Change input group addon to a delete button -->
+          <section id="poll-choices">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-menu-right"></span>
+              </span>
+              <input
+                type="text"
+                class="form-control choice-title"
+                name="title0"
+                placeholder="Option"
+              />
+              <input
+                type="text"
+                class="form-control choice-description"
+                name="desc0"
+                placeholder="Description (optional)"
+              />
+            </div>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-menu-right"></span>
+              </span>
+              <input
+                type="text"
+                class="form-control choice-title"
+                name="title1"
+                placeholder="Option"
+              />
+              <input
+                type="text"
+                class="form-control choice-description"
+                name="desc1"
+                placeholder="Description (optional)"
+              />
+            </div>
+          </section>
+
+          <!-- Submit Poll -->
           <input
             type="submit"
-            class="btn btn-primary btn-lg"
             value="Create Poll"
+            class="btn btn-primary btn-lg"
           />
         </form>
       </section>
@@ -152,5 +167,6 @@
       integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
       crossorigin="anonymous"
     ></script>
+    <script src="../public/scripts/app.js"></script>
   </body>
 </html>
