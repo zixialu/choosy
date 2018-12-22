@@ -48,7 +48,7 @@ module.exports = knex => {
 
 
     function parseChoices(id) {
-      for (let counter = 2; counter < keys.length; counter ++ 2) {
+      for (let counter = 2; counter < keys.length; counter += 2) {
         pollChoices.push({poll_id: id, title: input[keys[counter]], description: input[keys[counter + 1]]});
       }
       return pollChoices;
