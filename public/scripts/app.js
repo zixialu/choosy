@@ -34,8 +34,7 @@ $(function() {
     // Check if title field is being filled in
     if (getTitleValue($lastChoiceGroup)) {
       // Append a new input group
-      // TODO: Increment this number for every new input group
-      $pollChoices.append(createChoiceGroup(1));
+      $pollChoices.append(createChoiceGroup($pollChoices.children().length));
     }
   });
 });
