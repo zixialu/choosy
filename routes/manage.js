@@ -97,7 +97,7 @@ module.exports = knex => {
     console.log('choices data function input', pollChoices);
     /*
      * TODO: Map pollChoices into an array of knex sum promises, then
-     * Promise.all() he array to get an array of results. Then, loop through
+     * Promise.all() the array to get an array of results. Then, loop through
      * the array to find a rank sum for each choice.
      */
 
@@ -112,7 +112,10 @@ module.exports = knex => {
     // Process all the promises in parallel, then handle the result
     Promise.all(rankSumsKnexPromises)
       .then((result) => {
-        // TODO: Handle the results
+        // TODO: Handle the results - Push things to ranksData
+        /* ranksData may need to be an object keyed to choiceId? Elements may be
+         * pushed in random order because of the parallel nature of Promise.all
+         */
         console.log('Rank Promise.all array returns ' + result);
       })
 
