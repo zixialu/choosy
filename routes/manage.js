@@ -100,7 +100,7 @@ module.exports = knex => {
      * the array to get an array of results. Then, loop through each subarray to
      * find a rank sum for each choice.
      */
-    for (let x = 0; x < pollChoices.length; x++) {
+    const knexPromises = pollChoices.map(choice => {
       return knex
         .sum('rank')
         .from('poll_choices_votes')
@@ -108,6 +108,21 @@ module.exports = knex => {
         .then(result => {
           return parseInt(result[0].sum);
         });
+    });
+
+    Promise.all(knexPromises)
+      .then((result) => {
+        // TODO: Sum the ranks for each choice
+      })
+
+    // for (let x = 0; x < pollChoices.length; x++) {
+    //   return knex
+    //     .sum('rank')
+    //     .from('poll_choices_votes')
+    //     .where('poll_choice_id', pollChoices[x].id)
+    //     .then(result => {
+    //       return parseInt(result[0].sum);
+    //     });
       ranksData[pollChoices[x].id] = testVar;
     }
 
