@@ -96,23 +96,23 @@ module.exports = knex => {
   function findRanks(pollChoices) {
     console.log('choices data function input', pollChoices);
     /*
-     * TODO: Map pollChoices into an array of knex promises, then Promise.all()
-     * the array to get an array of results. Then, loop through each subarray to
-     * find a rank sum for each choice.
+     * TODO: Map pollChoices into an array of knex sum promises, then
+     * Promise.all() he array to get an array of results. Then, loop through
+     * the array to find a rank sum for each choice.
      */
-    const knexPromises = pollChoices.map(choice => {
+
+    //Create an array of knex promises
+    const rankSumsKnexPromises = pollChoices.map(choice => {
       return knex
         .sum('rank')
         .from('poll_choices_votes')
-        .where('poll_choice_id', pollChoices[x].id)
-        .then(result => {
-          return parseInt(result[0].sum);
-        });
+        .where('poll_choice_id', pollChoices[x].id);
     });
 
-    Promise.all(knexPromises)
+    // Process all the promises in parallel, then handle the result
+    Promise.all(rankSumsKnexPromises)
       .then((result) => {
-        // TODO: Sum the ranks for each choice
+        // TODO: Handle the results
       })
 
     // for (let x = 0; x < pollChoices.length; x++) {
