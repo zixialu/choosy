@@ -49,3 +49,8 @@ body {
 .choose-style {
   color: #e74c3c;
 }
+
+.btn {
+  font-family: Merriweather, sans-serif;
+  font-style: italic;
+}
