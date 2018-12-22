@@ -6,20 +6,8 @@
 }
 
 body {
-  /* width: 100%; */
-  /* min-width: 810px; */
-  /* height: 100%;
-  min-height: 600px; */
-
-  /* max-width: 1350px; */
-  /* width: expression_r(
-    Math.max(1000, Math.min(1200, document.body.offsetWidth * 0.99)) + 'px'
-  ); */
-
-  /* margin-top: 0px;
-  min-width: 700px;
-  margin: 0 auto; */
   padding-top: 65px;
+  font-family: 'Merriweather Sans', sans-serif;
 }
 
 .navbar-brand {
@@ -39,13 +27,30 @@ body {
   margin-top: 20px;
 }
 
-#sharelink {
-  padding: 5px 8px;
-  font-size: 15px;
-  line-height: 1.3333333;
-  border-radius: 6px;
+.input-group {
+  width: 100%;
+  padding-bottom: 2em;
 }
 
-#create-poll input {
-  margin-top: 1em;
+#create-poll h1 {
+  font-family: Merriweather, sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  margin-top: 0;
+  margin-bottom: 30px;
+}
+
+#create-poll h3 {
+  font-family: Merriweather, sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.choose-style {
+  color: #e74c3c;
+}
+
+.btn {
+  font-family: Merriweather, sans-serif;
+  font-style: italic;
 }
