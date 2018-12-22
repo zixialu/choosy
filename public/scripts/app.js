@@ -62,7 +62,7 @@ function createChoiceGroup(number) {
         type="text"
         class="form-control choice-description"
         name="desc${number}"
-        placeholder="Description"
+        placeholder="Description (optional)"
       />
     </div>
   `;
