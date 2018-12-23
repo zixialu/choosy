@@ -22,8 +22,6 @@ module.exports = knex => {
         const prompt = result[0];
         const pollChoices = result[1];
 
-        // TODO: Format this data
-        console.log('result is ' + result);
         res.json({ prompt, pollChoices });
       });
     });

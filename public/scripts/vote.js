@@ -1,7 +1,36 @@
 $(document).ready(function() {
+  // Make an ajax request to /vote/api to get the poll data
+  const publicId = url.substring(url.lastIndexOf('/') + 1);
+  $.get(`/vote/api/${publicId}`, res => {
+    // TODO: Insert data into page
+    populatePrompt(res.prompt);
+    res.pollChoices.forEach(choice => {
+      appendChoice(choice);
+    });
+  });
+
+  function populatePrompt(prompt) {
+    const $pollPrompt = $('.pollPrompt');
+    $pollPrompt.text(prompt);
+  }
+
+  function appendChoice(choice) {
+    const rawHTML = `
+      <li class="list-group-item ui-state-default">
+        <h4>${choice.title}</h4>
+        <section>${choice.description}</section>
+      </li>
+      `;
+    const $newElement = $.parseHTML(rawHTML);
+    $newElement.data('choiceId', choice.id);
+
+    const $unorderedList = $('#sortable');
+    $unorderedList.append($newElement);
+  }
+
   //Ajax POST request on form submit on vote page.
   let $votepoll = $('#vote-button');
-  $votepoll.submit(function (event) {
+  $votepoll.submit(function(event) {
     console.log('Button clicked!');
     event.preventDefault();
     let voteFormData = $votepoll.serialize();
