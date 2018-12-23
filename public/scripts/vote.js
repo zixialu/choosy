@@ -1,5 +1,6 @@
 $(document).ready(function() {
   // Make an ajax request to /vote/api to get the poll data
+  const url = window.location.href;
   const publicId = url.substring(url.lastIndexOf('/') + 1);
   $.get(`/vote/api/${publicId}`, res => {
     // TODO: Insert data into page
@@ -21,7 +22,7 @@ $(document).ready(function() {
         <section>${choice.description}</section>
       </li>
       `;
-    const $newElement = $.parseHTML(rawHTML);
+    const $newElement = $($.parseHTML(rawHTML));
     $newElement.data('choiceId', choice.id);
 
     const $unorderedList = $('#sortable');
@@ -51,18 +52,6 @@ $(document).ready(function() {
 
   //Submit vote
   const $submitVote = $('#submit-vote');
-
-  // FIXME: Remove this when page is made dynamic; this is placeholder data
-  $submitVote.data('pollId', 1234);
-  $('#sortable')
-    .children()[0]
-    .data('choiceId', 1);
-  $('#sortable')
-    .children()[1]
-    .data('choiceId', 2);
-  $('#sortable')
-    .children()[2]
-    .data('choiceId', 3);
 
   $submitVote.on('click', () => {
     // Form the AJAX body
