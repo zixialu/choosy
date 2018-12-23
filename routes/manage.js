@@ -7,7 +7,6 @@ module.exports = knex => {
   let pollData;
   let choicesData = [];
   let votesData = [];
-  let ranksData = {};
   let pollId;
 
   // Manages initial GET request to /manage/:id
@@ -15,40 +14,64 @@ module.exports = knex => {
     res.render('manage');
   });
 
-  const findRanks = function(pollChoices) {
-    console.log('choices data function input', pollChoices);
-    /*
-     * TODO: Map pollChoices into an array of knex sum promises, then
-     * Promise.all() the array to get an array of results. Then, loop through
-     * the array to find a rank sum for each choice.
-     */
-
-    //Create an array of knex promises
-    return pollChoices.map(choice => {
-      return knex
-        .sum('rank')
-        .from('poll_choices_votes')
-        .where('poll_choice_id', choice.id);
-    });
-
-    // Process all the promises in parallel, then handle the result
-    // Promise.all(rankSumsKnexPromises).then(result => {
-      // TODO: Handle the results - Push things to ranksData
-      /*
-       * ranksData may need to be an object keyed to choiceId? Elements may be
-       * pushed in random order because of the parallel nature of Promise.all
-       */
-      // console.log('Rank Promise.all array returns ' + result);
-    }
 
   // Manages AJAX GET request for data once document is ready
   router.get('/api/:id', (req, res) => {
+
+    const findRanks = function(pollChoices) {
+      console.log('choices data function input', pollChoices);
+      //Create an array of knex promises
+      return pollChoices.map(choice => {
+        return knex
+          .sum('rank')
+          .from('poll_choices_votes')
+          .where('poll_choice_id', choice.id);
+      });
+    }
+
+    const findPolls = function(pollId) {
+      return knex
+        .first('*')
+        .from('polls')
+        .where('id', pollId);
+    }
+
+    const findPollChoices = function(pollId) {
+      return knex
+        .select('*')
+        .from('poll_choices')
+        .where('poll_id', pollId);
+    }
+
+    const findVotes = function (pollId) {
+      return knex
+        .select('*')
+        .from('votes')
+        .where('poll_id', pollId);
+    }
+
+    // TODO: Review and refactor this maybe
+    const parseData = function (poll, choices, ranks) {
+      let parsedPrompt = poll.prompt
+      let parsedChoices = []
+      let parsedDescriptions = []
+      choices.forEach(choice => {
+        parsedChoices.push(choice.title)
+        parsedDescriptions.push(choice.description)
+      })
+      let parsedRanks = []
+      ranks.forEach(rank => {
+        parsedRanks.push(parseInt(rank[0].sum))
+      })
+      return {parsedPrompt, parsedChoices, parsedDescriptions, parsedRanks}
+    }
+
     console.log('params id', req.params.id);
     pollId = req.params.id;
 
     findPolls(pollId).then(polls => {
       pollData = polls;
-      console.log(pollData);
+      console.log('this is the poll data', pollData);
     });
 
     Promise.all([findPollChoices(pollId), findVotes(pollId)])
@@ -57,7 +80,7 @@ module.exports = knex => {
         votesData = result[1];
         Promise.all(findRanks(result[0]))
         .then(result => {
-          res.json({choicesData, votesData, result})
+          res.json(parseData(pollData, choicesData, result))
           // .then(result => {
           // })
         })
@@ -103,26 +126,7 @@ module.exports = knex => {
 
   return router;
 
-  function findPolls(pollId) {
-    return knex
-      .first('*')
-      .from('polls')
-      .where('id', pollId);
-  }
 
-  function findPollChoices(pollId) {
-    return knex
-      .select('*')
-      .from('poll_choices')
-      .where('poll_id', pollId);
-  }
-
-  function findVotes(pollId) {
-    return knex
-      .select('*')
-      .from('votes')
-      .where('poll_id', pollId);
-  }
 
 ;
 
