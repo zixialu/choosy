@@ -4,24 +4,29 @@ const express = require('express');
 const router = express.Router();
 
 module.exports = knex => {
-
   let pollData;
   let choicesData = [];
-
 
   //Manages initial GET request to /vote/:id
   // TODO: This uses ejs right now, decide whether to do it like this or use jquery instead
   router.get('/:id', (req, res) => {
-    res.render('vote')
+    res.render('vote');
   });
 
   //Manages AJAX GET request for data once document is ready
   router.get('/api/:id', (req, res) => {
     let publicId = req.params.id;
 
-    findPoll(publicId)
-    .then((poll) => findChoices(poll))
+    findPoll(publicId).then(poll => {
+      Promise.all([getPrompt(poll), findPollChoices(poll)]).then(result => {
+        const prompt = result[0];
+        const pollChoices = result[1];
 
+        // TODO: Format this data
+        console.log('result is ' + result);
+        res.json({ prompt, pollChoices });
+      });
+    });
 
     //TODO: render the vote form
 
@@ -78,20 +83,20 @@ module.exports = knex => {
   return router;
 
   function findPoll(publicId) {
-    pollData = knex
-    .first('*')
-    .from('polls')
-    .where('public_id', publicId)
+    return knex
+      .first('*')
+      .from('polls')
+      .where('public_id', publicId);
+  }
 
-    return pollData;
+  function getPrompt(poll) {
+    return poll.prompt;
   }
 
   function findPollChoices(poll) {
-    choicesData = knex
-    .select('*')
-    .from('poll_choices')
-    .where('poll_id', poll.id)
-
-    return choicesData;
+    return knex
+      .select('*')
+      .from('poll_choices')
+      .where('poll_id', poll.id);
   }
 };
