@@ -27,24 +27,6 @@ module.exports = knex => {
         res.json({ prompt, pollChoices });
       });
     });
-
-    //TODO: render the vote form
-
-    // // Get the poll from db
-    // const poll = knex('polls')
-    //   .first()
-    //   .where({ id: pollId });
-
-    // const choices = knex('poll_choices')
-    //   .select()
-    //   .where({ poll_id: pollId });
-
-    // const templateVars = {
-    //   poll,
-    //   choices
-    // };
-    // // TODO: Change this path once it's created
-    // res.render('vote', templateVars);
   });
 
   // PUT new vote
