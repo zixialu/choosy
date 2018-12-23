@@ -12,8 +12,7 @@ $.ajax({
     type: 'get',
     url: `/manage/api/${pollId}`,
     success: function(data) {
-      console.log('here is the data', data)
-      $("section.jumbotron").prepend(`<h1>${data.parsedPrompt}</h1>`)
+      $("section.jumbotron").prepend(`<h3>${data.parsedPrompt}</h3>`)
       createChart(data)
     },
     // complete: function() {
@@ -31,14 +30,20 @@ function requestRepeater(id) {
 
 function createChart(data) {
   var ctx = document.getElementById("myChart");
+  let total = 0;
+  data.parsedRanks.forEach(rank => {
+    total += rank
+  })
   let labels = data.parsedChoices
-  let dataInput = data.parsedRanks
+  let dataInput = data.parsedRanks.map(rank => {
+    return ((rank / total) * 100).toFixed(2)
+  })
   var myChart = new Chart(ctx, {
       type: 'bar',
       data: {
           labels: labels,
           datasets: [{
-              label: '# of Votes',
+              label: 'Percentage',
               data: dataInput,
               backgroundColor: [
                   'rgba(255, 99, 132, 0.2)',
@@ -63,7 +68,15 @@ function createChart(data) {
           scales: {
               yAxes: [{
                   ticks: {
-                      beginAtZero:true
+                      min: 0,
+                      max: 100,
+                      callback: function(value) {
+                        return value + '%'
+                      }
+                  },
+                  scaleLabel: {
+                    display: true,
+                    labelString: "Percentage"
                   }
               }]
           }

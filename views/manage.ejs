@@ -31,7 +31,8 @@
     />
 
     <!-- Custom override -->
-    <link href="styles/pollerpage.css" rel="stylesheet" />
+    <link href="/styles/pollerpage.css" rel="stylesheet" />
+
   </head>
 
   <body>
@@ -84,80 +85,7 @@
     <!-------------------------- Jumbotron  START --------------->
     <main class="container">
       <section class="jumbotron">
-        <form id="create-poll" method="POST" action="/">
-          <h1>
-            What are you feeling <i class="choose-style">choosy</i> about?
-          </h1>
-
-          <!-- Email and Prompt -->
-          <div class="input-group input-group-lg">
-            <input
-              type="text"
-              name="prompt"
-              class="form-control"
-              placeholder="Prompt"
-            />
-          </div>
-          <div class="input-group">
-            <span class="input-group-addon"
-              ><span class="glyphicon glyphicon-envelope"></span
-            ></span>
-            <input
-              type="email"
-              class="form-control"
-              name="email"
-              placeholder="Email"
-            />
-          </div>
-
-          <h3 id="optioninfo">Give us some choices:</h3>
-
-          <!-- Poll Choices -->
-          <!-- TODO: Change input group addon to a delete button -->
-          <section id="poll-choices">
-            <div class="input-group">
-              <span class="input-group-addon">
-                <span class="glyphicon glyphicon-menu-right"></span>
-              </span>
-              <input
-                type="text"
-                class="form-control choice-title"
-                name="title0"
-                placeholder="Option"
-              />
-              <input
-                type="text"
-                class="form-control choice-description"
-                name="desc0"
-                placeholder="Description (optional)"
-              />
-            </div>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <span class="glyphicon glyphicon-menu-right"></span>
-              </span>
-              <input
-                type="text"
-                class="form-control choice-title"
-                name="title1"
-                placeholder="Option"
-              />
-              <input
-                type="text"
-                class="form-control choice-description"
-                name="desc1"
-                placeholder="Description (optional)"
-              />
-            </div>
-          </section>
-
-          <!-- Submit Poll -->
-          <input
-            type="submit"
-            value="Create Poll"
-            class="btn btn-primary btn-lg"
-          />
-        </form>
+        <canvas id="myChart" width="400" height="400"></canvas>
       </section>
     </main>
 
@@ -169,6 +97,11 @@
       integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
       crossorigin="anonymous"
     ></script>
-    <script src="/scripts/app.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <script type="text/javascript" src="/scripts/manage.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.js"></script>
+
   </body>
 </html>

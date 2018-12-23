@@ -21,28 +21,34 @@ module.exports = knex => {
     let pollChoices = [];
     let pollId;
 
-    insertPoller()
-    .then(pollerId => insertPoll(pollerId))
-    .then(pollId => insertPollChoices(pollId))
-    .then(res.send(pollId))
+    Promise.all([insertPoller()])
+    .then(result => {
+      console.log('first promise', result)
+      const pollerId = parseInt(result[0][0])
+      insertPoll(pollerId)
+      .then(pollId => {
+        insertPollChoices(parseInt(pollId))
+        .then(res.send(pollId))
+      })
+    })
 
     // return pollId;
 
     function insertPoller() {
-      knex('pollers')
-      .insert({email: input.email})
-      .returning('id')
+      return knex('pollers')
+        .returning('id')
+        .insert({email: req.body.email})
     };
 
     function insertPoll(pollerId) {
-      knex('polls')
+      return knex('polls')
       .insert({poller_id: pollerId, prompt: input.prompt, public_id: publicId})
       .returning('id')
 
     }
 
     function insertPollChoices(id) {
-      knex('poll_choices').insert(parseChoices(id));
+      return knex('poll_choices').insert(parseChoices(id));
       pollId = id;
     }
 
