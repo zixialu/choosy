@@ -31,27 +31,36 @@ module.exports = knex => {
   router.put('/:id', (req, res) => {
     // TODO: Pull all vote parameters out from request body
     // Vote
-    const pollId = req.params.pollId;
-    const voteDate = Date();
+    const publicId = req.params.id;
 
-    // Insert new vote
-    knex('votes')
-      .insert({
-        poll_id: pollId,
-        vote_date: voteDate
-      })
-      .returning('*')
-      .then(vote => {
-        // Poll choices/votes join table
-        // TODO: Insert each choice rank into poll_choices_votes
-        req.body.pollChoices.forEach(choice => {
-          const { choiceId, rank } = choice;
-          knex('poll_choices_votes').insert({
-            vote_id: vote.id,
-            poll_choice_id: choiceId,
-            rank
+    // Get poll id from public id
+    Promise.all([findPoll(publicId)])
+      // Create and return new vote
+      .then(results => {
+        const pollId = results[0].id;
+        insertVote(pollId)
+          // Insert new pollChoicesVotes
+          .then(vote => {
+            // Poll choices/votes join table
+            // TODO: Insert each choice rank into poll_choices_votes
+            console.log('vote', vote);
+            const promises = JSON.parse(req.body.pollChoices).map(choice => {
+              const { choiceId, rank } = choice;
+              return knex('poll_choices_votes')
+                .insert({
+                  vote_id: vote.id,
+                  poll_choice_id: choiceId,
+                  rank
+                })
+                .returning('*');
+            });
+
+            Promise.all(promises).then(results => {
+              // TODO: Resolve, maybe redirect to another page
+              console.log('Submitted vote!');
+              res.status(201).send('Thanks for voting!');
+            });
           });
-        });
       });
   });
 
@@ -78,5 +87,15 @@ module.exports = knex => {
       .select('*')
       .from('poll_choices')
       .where('poll_id', poll.id);
+  }
+
+  function insertVote(pollId) {
+    const voteDate = Date();
+    return knex('votes')
+      .insert({
+        poll_id: pollId,
+        vote_date: null
+      })
+      .returning('*');
   }
 };

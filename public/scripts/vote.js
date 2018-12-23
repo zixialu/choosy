@@ -29,14 +29,6 @@ $(document).ready(function() {
     $unorderedList.append($newElement);
   }
 
-  //Ajax POST request on form submit on vote page.
-  let $votepoll = $('#vote-button');
-  $votepoll.submit(function(event) {
-    console.log('Button clicked!');
-    event.preventDefault();
-    let voteFormData = $votepoll.serialize();
-  });
-
   // Drag and drop list
   $('#sortable').sortable({
     // axis: 'y',
@@ -52,26 +44,28 @@ $(document).ready(function() {
 
   //Submit vote
   const $submitVote = $('#submit-vote');
-
   $submitVote.on('click', () => {
     // Form the AJAX body
-    // TODO: put the pollId into submit's data tag when page is loaded
-    const pollId = $submitVote.data('pollId');
-
-    const $choiceElements = $('#sortable').children();
+    // Construct the data to submit
+    const choiceElements = $('#sortable')
+      .children()
+      .toArray();
+    const numberOfChoices = choiceElements.length;
     const pollChoices = [];
-    $choiceElements.forEach((choice, index) => {
+    choiceElements.forEach((choice, index) => {
       pollChoices.push({
-        // TODO: Add data tags to each choice <li> holding choiceId on page load
-        choiceId: $(choice).data(choiceId),
-        // FIXME: Reverse this number, maybe? Depending on how we process this?
-        rank: index
+        choiceId: $(choice).data('choiceId'),
+        rank: numberOfChoices - index
       });
     });
 
     // TODO: Validation
     // TODO: Serialize the data?
-    $.put(`/vote/${pollId}`, pollChoices, () => {
+    $.ajax({
+      method: 'PUT',
+      url: `/vote/${publicId}`,
+      data: { pollChoices: JSON.stringify(pollChoices) }
+    }).done(() => {
       // TODO: Implement callback for after form is posted
     });
   });
