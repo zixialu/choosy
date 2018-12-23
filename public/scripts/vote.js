@@ -11,7 +11,7 @@ $(document).ready(function() {
   });
 
   function populatePrompt(prompt) {
-    const $pollPrompt = $('.pollPrompt');
+    const $pollPrompt = $('.poll-prompt');
     $pollPrompt.text(prompt);
   }
 
