@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Meta Information -->
+    <title>Test Page</title>
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+
+
+  </head>
+
+  <body>
+
+    <!-- Top nav bar (fixed) -->
+    <nav id="nav-bar">
+      <span class="header">Choosy</span>
+    </nav>
+
+    <!-- Page-specific (main) content here -->
+    <main class="container">
+      <!-- form -->
+      <section class="create-poll">
+        <h2>Create Poll</h2>
+        <form id="create-poll" method="post" action="/">
+          <input type="text" name="email" placeholder="email"></input>
+          <input type="text" name="prompt" placeholder="prompt"></input>
+          <input type="text" name="polloption1" placeholder="choice1"></input>
+          <input type="text" name="polloption1desc" placeholder="choice1desc"></input>
+          <input type="text" name="polloption2" placeholder="choice2"></input>
+          <input type="text" name="polloption2desc" placeholder="choice2desc"></input>
+          <input type="submit" value="Create Poll">
+        </form>
+      </section>
+    </main>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <script type="text/javascript" src="./public/scripts/app.js"></script>
+
+  </body>
+</html>

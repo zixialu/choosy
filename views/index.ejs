@@ -1,17 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Home Page</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <title>choosy</title>
 
-    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700|Merriweather:400,400i,900i"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap -->
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous"
+    />
+
+    <!-- Optional Bootstrap theme -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+      integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+      crossorigin="anonymous"
+    />
+
+    <!-- Custom override -->
+    <link href="styles/pollerpage.css" rel="stylesheet" />
   </head>
 
   <body>
-    <h1>Hello World!</h1>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <!-- Navbar hamburger -->
+          <button
+            type="button"
+            class="navbar-toggle collapsed"
+            data-toggle="collapse"
+            data-target="#navbar"
+            aria-expanded="false"
+            aria-controls="navbar"
+          >
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span> <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">choosy</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navbar">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a
+                href="#"
+                class="dropdown-toggle"
+                data-toggle="dropdown"
+                role="button"
+                aria-haspopup="true"
+                aria-expanded="false"
+                >Menu <span class="caret"></span
+              ></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Edit</a></li>
+                <li><a href="#">Delete</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+      </div>
+    </nav>
+
+    <!-------------------------- Jumbotron  START --------------->
+    <main class="container">
+      <section class="jumbotron">
+        <form id="create-poll" method="POST" action="/">
+          <h1>
+            What are you feeling <i class="choose-style">choosy</i> about?
+          </h1>
+
+          <!-- Email and Prompt -->
+          <div class="input-group input-group-lg">
+            <input
+              type="text"
+              name="prompt"
+              class="form-control"
+              placeholder="Prompt"
+            />
+          </div>
+          <div class="input-group">
+            <span class="input-group-addon"
+              ><span class="glyphicon glyphicon-envelope"></span
+            ></span>
+            <input
+              type="email"
+              class="form-control"
+              name="email"
+              placeholder="Email"
+            />
+          </div>
+
+          <h3 id="optioninfo">Give us some choices:</h3>
+
+          <!-- Poll Choices -->
+          <!-- TODO: Change input group addon to a delete button -->
+          <section id="poll-choices">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-menu-right"></span>
+              </span>
+              <input
+                type="text"
+                class="form-control choice-title"
+                name="title0"
+                placeholder="Option"
+              />
+              <input
+                type="text"
+                class="form-control choice-description"
+                name="desc0"
+                placeholder="Description (optional)"
+              />
+            </div>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-menu-right"></span>
+              </span>
+              <input
+                type="text"
+                class="form-control choice-title"
+                name="title1"
+                placeholder="Option"
+              />
+              <input
+                type="text"
+                class="form-control choice-description"
+                name="desc1"
+                placeholder="Description (optional)"
+              />
+            </div>
+          </section>
+
+          <!-- Submit Poll -->
+          <input
+            type="submit"
+            value="Create Poll"
+            class="btn btn-primary btn-lg"
+          />
+        </form>
+      </section>
+    </main>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+      integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/scripts/app.js"></script>
   </body>
 </html>
