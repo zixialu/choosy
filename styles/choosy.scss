@@ -2,6 +2,7 @@
   font: {
     family: Merriweather, sans-serif;
     style: italic;
+    weight: 900;
   }
 }
 
@@ -23,14 +24,12 @@ body {
 // Navbar
 .navbar-brand {
   @extend %merriweather;
-  font-weight: 900;
   font-size: 18pt;
 }
 
-// Main Vote
+// Main vote
 .poll-prompt {
   @extend %merriweather;
-  font-weight: 900;
 }
 
 #sortable {
@@ -43,4 +42,36 @@ body {
   section {
     font-style: italic;
   }
+}
+
+// Main new poll
+.poll-prompt {
+  @extend %merriweather;
+}
+
+.input-group {
+  width: 100%;
+  padding-bottom: 2em;
+}
+
+#create-poll {
+  h2 {
+    @extend %merriweather;
+    margin-top: 0;
+    margin-bottom: 30px;
+  }
+
+  h3 {
+    @extend %merriweather;
+    font-weight: 400;
+  }
+}
+
+.choose-style {
+  color: #e74c3c;
+}
+
+.btn {
+  @extend %merriweather;
+  font-weight: 400;
 }
