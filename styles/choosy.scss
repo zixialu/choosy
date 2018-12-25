@@ -59,16 +59,16 @@ body {
     @extend %merriweather;
     margin-top: 0;
     margin-bottom: 30px;
+
+    .choose-style {
+      color: #e74c3c;
+    }
   }
 
   h3 {
     @extend %merriweather;
     font-weight: 400;
   }
-}
-
-.choose-style {
-  color: #e74c3c;
 }
 
 .btn {
