@@ -32,18 +32,20 @@ body {
   padding-bottom: 2em;
 }
 
-#create-poll h2 {
-  font-family: Merriweather, sans-serif;
-  font-weight: 900;
-  font-style: italic;
-  margin-top: 0;
-  margin-bottom: 30px;
-}
+#create-poll {
+  h2 {
+    font-family: Merriweather, sans-serif;
+    font-weight: 900;
+    font-style: italic;
+    margin-top: 0;
+    margin-bottom: 30px;
+  }
 
-#create-poll h3 {
-  font-family: Merriweather, sans-serif;
-  font-weight: 400;
-  font-style: italic;
+  h3 {
+    font-family: Merriweather, sans-serif;
+    font-weight: 400;
+    font-style: italic;
+  }
 }
 
 .choose-style {
