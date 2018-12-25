@@ -1,8 +1,15 @@
-body {
-  padding-top: 65px;
+%merriweather {
+  font: {
+    family: Merriweather, sans-serif;
+    style: italic;
+    weight: 900;
+  }
 }
 
-/* Customize container */
+%merriweather-sans {
+  font-family: 'Merriweather sans', sans-serif;
+}
+
 @media (min-width: 768px) {
   .container {
     max-width: 730px;
@@ -10,30 +17,61 @@ body {
 }
 
 body {
-  font-family: 'Merriweather sans', sans-serif;
+  @extend %merriweather-sans;
+  padding-top: 65px;
 }
 
+// Navbar
 .navbar-brand {
-  font-family: Merriweather, sans-serif;
-  font-weight: 900;
-  font-style: italic;
+  @extend %merriweather;
   font-size: 18pt;
 }
 
+// Main vote
 .poll-prompt {
-  font-family: Merriweather, sans-serif;
-  font-weight: 900;
-  font-style: italic;
+  @extend %merriweather;
 }
 
-.list-group {
+#sortable {
   margin-top: 20px;
+
+  h4 {
+    font-weight: 700;
+  }
+
+  section {
+    font-style: italic;
+  }
 }
 
-#sortable h4 {
-  font-weight: 700;
+// Main new poll
+.poll-prompt {
+  @extend %merriweather;
 }
 
-#sortable section {
-  font-style: italic;
+.input-group {
+  width: 100%;
+  padding-bottom: 2em;
+}
+
+#create-poll {
+  h2 {
+    @extend %merriweather;
+    margin-top: 0;
+    margin-bottom: 30px;
+
+    .choose-style {
+      color: #e74c3c;
+    }
+  }
+
+  h3 {
+    @extend %merriweather;
+    font-weight: 400;
+  }
+}
+
+.btn {
+  @extend %merriweather;
+  font-weight: 400;
 }
