@@ -23,23 +23,30 @@ function updateData(id) {
 }
 
 function createChart(data) {
-  var ctx = document.getElementById('poll-results');
+  // Set font defaults
+  Chart.defaults.global.defaultFontFamily = "'Merriweather Sans', 'sans-serif'";
+  Chart.defaults.global.defaultFontSize = 14;
+
+  const ctx = document.getElementById('poll-results');
 
   // Find the total sum of all ranks
-  let total = data.parsedRanks.reduce((acc, cur) => acc + cur);
+  const total = data.parsedRanks.reduce((acc, cur) => acc + cur);
 
-  let labels = data.parsedChoices;
-  let dataInput = data.parsedRanks.map(rank => {
+  const labels = data.parsedChoices;
+  const rankPercentages = data.parsedRanks.map(rank => {
     return ((rank / total) * 100).toFixed(2);
   });
-  var myChart = new Chart(ctx, {
-    type: 'bar',
+
+  // Make the chart
+  const rankChart = new Chart(ctx, {
+    type: 'horizontalBar',
+
     data: {
-      labels: labels,
+      labels,
       datasets: [
         {
           label: 'Percentage',
-          data: dataInput,
+          data: rankPercentages,
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
             'rgba(54, 162, 235, 0.2)',
@@ -60,23 +67,22 @@ function createChart(data) {
         }
       ]
     },
+
     options: {
       scales: {
-        yAxes: [
+        xAxes: [
           {
             ticks: {
               min: 0,
-              max: 100,
               callback: function(value) {
                 return value + '%';
               }
-            },
-            scaleLabel: {
-              display: true,
-              labelString: 'Percentage'
             }
           }
         ]
+      },
+      legend: {
+        display: false
       }
     }
   });
