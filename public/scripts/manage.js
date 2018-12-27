@@ -6,7 +6,10 @@ $(document).ready(function() {
     type: 'get',
     url: `/manage/api/${pollId}`,
     success: function(data) {
-      $('section.jumbotron').prepend(`<h3>${data.parsedPrompt}</h3>`);
+      // Set prompt header
+      const $promptHeader = $('.poll-prompt');
+      $promptHeader.text(data.parsedPrompt);
+
       createChart(data);
     }
     // complete: function() {
