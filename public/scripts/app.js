@@ -1,4 +1,8 @@
 $(function() {
+  // Hide alert box on page load
+  const $alertPanel = $('#form-alert');
+  $alertPanel.hide();
+
   //Ajax POST request on form submit on main page.
   let $pollForm = $('#create-poll');
   let $choices = $('#poll-choices');
@@ -47,12 +51,19 @@ $(function() {
             //   // TODO: figure out how to get pollID from data sent back by POST req
             //   // TODO: figure out how to hash pollID
             //   res.redirect('/manage/:pollId');
+            
+            // Redirect to manage page on successful post
+            // TODO: put this in the AJAX success block?
+            if (status === 'success') {
+              const managePath = 'http://localhost:8080/manage/';
+              location.href = managePath + data;
+              console.log(location.href);
+            }
           });
         }
       }
     }
 
-    //
   });
 
   /*
