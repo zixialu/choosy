@@ -3,7 +3,7 @@
 const express = require('express');
 const router = express.Router();
 
-var AES = require('crypto-js/aes');
+var CryptoJS = require('crypto-js');
 
 module.exports = knex => {
   let pollData;
@@ -21,10 +21,13 @@ module.exports = knex => {
   router.get('/api/:encryptedId', (req, res) => {
     // Decrypt id
     var bytes = CryptoJS.AES.decrypt(
-      req.params.encryptedId.toString(),
+      decodeURIComponent(req.params.encryptedId),
       process.env.AES_SECRET_KEY
     );
     const id = bytes.toString(CryptoJS.enc.Utf8);
+    console.log(
+      'unescaped id is ' + decodeURIComponent(req.params.encryptedId)
+    );
 
     const findRanks = function(pollChoices) {
       console.log('choices data function input', pollChoices);
@@ -86,7 +89,7 @@ module.exports = knex => {
     };
 
     console.log('params id', id);
-    pollId = req.id;
+    pollId = id;
 
     findPoll(pollId).then(poll => {
       pollData = poll;

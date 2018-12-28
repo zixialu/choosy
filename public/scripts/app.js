@@ -10,11 +10,19 @@ $(function() {
     let formData = $pollForm.serialize();
 
     $.post('/', formData, function(data, status) {
-      console.log(data)// console.log("data that comes back from post request", data);
+      console.log(data, status); // console.log("data that comes back from post request", data);
       //   let pollId = ***;
       //   // TODO: figure out how to get pollID from data sent back by POST req
       //   // TODO: figure out how to hash pollID
       //   res.redirect('/manage/:pollId');
+
+      // Redirect to manage page on successful post
+      // TODO: put this in the AJAX success block?
+      if (status === 'success') {
+        const managePath = 'http://localhost:8080/manage/';
+        location.href = managePath + data;
+        console.log(location.href);
+      }
     });
   });
 

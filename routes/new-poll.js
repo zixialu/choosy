@@ -27,13 +27,16 @@ module.exports = knex => {
       console.log('first promise', result);
       const pollerId = parseInt(result[0][0]);
       insertPoll(pollerId).then(pollId => {
-        insertPollChoices(parseInt(pollId)).then(res.send(pollId));
+        insertPollChoices(parseInt(pollId)).then(() => {
+          // Using pollId, return encrypted pollId
+          const encryptedId = AES.encrypt(
+            pollId.toString(),
+            process.env.AES_SECRET_KEY
+          );
+          res.status(201).send(encodeURIComponent(encryptedId));
+        });
       });
     });
-
-    // Using pollId, redirect to manage page
-    const encryptedId = AES.encrypt(pollId, process.env.AES_SECRET_KEY);
-    res.redirect(303, `/manage/${encryptedId}`);
 
     function insertPoller() {
       return knex('pollers')
