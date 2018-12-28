@@ -57,7 +57,7 @@ function createChart(data) {
           label: '% Score',
           data: rankPercentages,
           backgroundColor: 'rgba(231, 76, 60, 0.7)',
-          hoverBackgroundColor: 'rgba(231, 76, 60, 0.9)',
+          hoverBackgroundColor: 'rgba(231, 76, 60, 1.0)',
           borderColor: 'rgba(231, 76, 60, 1.0)',
           borderWidth: 1
         }
@@ -80,7 +80,7 @@ function createChart(data) {
         yAxes: [
           {
             // This constrains bar width
-            maxBarThickness: 100,
+            // maxBarThickness: 100,
             gridLines: {
               display: false
             }
@@ -98,7 +98,9 @@ function createChart(data) {
         // The following is the chart.js default font color
         titleFontColor: '#666666',
         bodyFontColor: '#666666',
-        displayColors: false
+        displayColors: false,
+        borderColor: 'rgba(231, 76, 60, 1.0)',
+        borderWidth: 1
       }
     }
   });
