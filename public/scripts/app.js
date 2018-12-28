@@ -1,4 +1,8 @@
 $(function() {
+  // Hide alert box on page load
+  const $alertPanel = $('#form-alert');
+  $alertPanel.hide();
+
   //Ajax POST request on form submit on main page.
   let $pollForm = $('#create-poll');
 
@@ -10,7 +14,7 @@ $(function() {
     let formData = $pollForm.serialize();
 
     $.post('/', formData, function(data, status) {
-      console.log(data)// console.log("data that comes back from post request", data);
+      console.log(data); // console.log("data that comes back from post request", data);
       //   let pollId = ***;
       //   // TODO: figure out how to get pollID from data sent back by POST req
       //   // TODO: figure out how to hash pollID
