@@ -25,6 +25,7 @@ html {
   box-sizing: inherit;
 }
 
+// Media queries for responsive design
 @media (min-width: 768px) {
   .container {
     max-width: 730px;
@@ -34,6 +35,14 @@ html {
 body {
   @extend %merriweather-sans;
   padding-top: 65px;
+}
+
+.navbar {
+  // background: #263238;
+}
+
+.jumbotron {
+  background: #ecf0f1;
 }
 
 // Navbar
