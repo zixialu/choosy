@@ -88,7 +88,10 @@
     <!-------------------------- Jumbotron  START --------------->
     <main class="container">
       <section class="jumbotron">
-        <canvas id="myChart" width="400" height="400"></canvas>
+        <h2 class="poll-prompt"></h2>
+        <div class="chart-container panel panel-default">
+          <canvas id="poll-results" width="400" height="400"></canvas>
+        </div>
       </section>
     </main>
 
@@ -100,11 +103,10 @@
       integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
       crossorigin="anonymous"
     ></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-
-    <script type="text/javascript" src="/scripts/manage.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.js"></script>
+
+    <script src="/scripts/manage.js"></script>
 
   </body>
 </html>
