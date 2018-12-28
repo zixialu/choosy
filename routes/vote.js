@@ -32,7 +32,7 @@ module.exports = knex => {
     // TODO: Pull all vote parameters out from request body
     // Vote
     const publicId = req.params.id;
-
+    let voteId;
     // Get poll id from public id
     Promise.all([findPoll(publicId)])
       // Create and return new vote
@@ -41,6 +41,8 @@ module.exports = knex => {
         insertVote(pollId)
           // Insert new pollChoicesVotes
           .then(vote => {
+            //FIXME: vote ID not getting saved to poll_choices_votes
+            voteId = vote.id;
             // Poll choices/votes join table
             // TODO: Insert each choice rank into poll_choices_votes
             console.log('vote', vote);
@@ -48,17 +50,18 @@ module.exports = knex => {
               const { choiceId, rank } = choice;
               return knex('poll_choices_votes')
                 .insert({
-                  vote_id: vote.id,
+                  vote_id: voteId,
                   poll_choice_id: choiceId,
                   rank
                 })
                 .returning('*');
             });
-
-            Promise.all(promises).then(results => {
+            // .then(() => {
+              Promise.all(promises).then(results => {
               // TODO: Resolve, maybe redirect to another page
               console.log('Submitted vote!');
               res.status(201).send('Thanks for voting!');
+            // });
             });
           });
       });

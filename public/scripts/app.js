@@ -22,11 +22,13 @@ $(function() {
 
     function formValidation(data) {
       if (!data[0].value) {
+        $alertPanel.slideToggle();
         $('#form-alert .panel-body').text(
           'Please write a prompt for your poll'
         );
         console.log('Please write a prompt for your poll');
       } else if (!data[1].value) {
+        $alertPanel.slideToggle();
         $('form-alert .panel-body').text('Please insert a valid email address');
         console.log('Please insert a valid email address');
       } else {
@@ -44,14 +46,13 @@ $(function() {
           );
         } else {
           console.log('parsed data', parsedFormData);
-          let newData = JSON.stringify(parsedFormData);
           $.post('/', parsedFormData, function(data, status) {
             // console.log(data)// console.log("data that comes back from post request", data);
             //   let pollId = ***;
             //   // TODO: figure out how to get pollID from data sent back by POST req
             //   // TODO: figure out how to hash pollID
             //   res.redirect('/manage/:pollId');
-            
+
             // Redirect to manage page on successful post
             // TODO: put this in the AJAX success block?
             if (status === 'success') {
