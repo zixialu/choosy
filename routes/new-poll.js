@@ -18,7 +18,6 @@ module.exports = knex => {
   router.post('/', (req, res) => {
     //creates variable to hold the object sent from submit button
     let input = req.body;
-
     let keys = Object.keys(input);
     let publicId = uuidv4();
     let pollChoices = [];
