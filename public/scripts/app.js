@@ -1,21 +1,29 @@
 $(function() {
   //Ajax POST request on form submit on main page.
   let $pollForm = $('#create-poll');
+  let $choices = $('#poll-choices')
 
   // Submit form event
   $pollForm.submit(function(event) {
     console.log('Submit button clicked!');
     event.preventDefault();
     // TODO: create helper function to validate submission
-    let formData = $pollForm.serialize();
 
-    $.post('/', formData, function(data, status) {
-      console.log(data)// console.log("data that comes back from post request", data);
+
+    // let formData = $pollForm.serialize();
+
+    let formData = JSON.stringify(jQuery($pollForm).serializeArray());
+    let parsedFormData = [];
+    formValidation(formData);
+
+
+    // $.post('/', formData, function(data, status) {
+      // console.log(data)// console.log("data that comes back from post request", data);
       //   let pollId = ***;
       //   // TODO: figure out how to get pollID from data sent back by POST req
       //   // TODO: figure out how to hash pollID
       //   res.redirect('/manage/:pollId');
-    });
+    // });
   });
 
   /*
@@ -66,6 +74,27 @@ function createChoiceGroup(number) {
       />
     </div>
   `;
+
+}
+
+function formValidation(data) {
+  if (!data[0].value) {
+    $('#form-alert .panel-body').text('Please write a prompt for your poll')
+  } else if (!data[1].value) {
+    $('form-alert .panel-body').text('Please insert a valid email address')
+  } else {
+    parsedFormData.push(data[1].value, data[2].value)
+    for (let counter = 2; counter < data.length; counter += 2) {
+      if (data[counter].value) {
+        parsedFormData.push(data[counter].value, data[counter + 1].value)
+      }
+    }
+    if (parsedFormData.length <= 4) {
+      $('#form-alert .panel-body').text('Please create a poll with at least two options')
+    } else {
+      console.log(parsedFormData)
+    }
+  }
 }
 
 // $(() => {
