@@ -23,11 +23,20 @@ function updateData(id) {
 }
 
 function createChart(data) {
+  const $chartCanvas = $('#poll-results');
+
+  // Resize canvas to fit any number of options
+  // These heights are just rough estimates
+  const elementHeight = 50;
+  const axisHeight = 100;
+  $chartCanvas.prop(
+    'height',
+    data.parsedRanks.length * elementHeight + axisHeight
+  );
+
   // Set font defaults
   Chart.defaults.global.defaultFontFamily = "'Merriweather Sans', 'sans-serif'";
   Chart.defaults.global.defaultFontSize = 14;
-
-  const ctx = document.getElementById('poll-results');
 
   // Find the total sum of all ranks
   const total = data.parsedRanks.reduce((acc, cur) => acc + cur);
@@ -38,17 +47,18 @@ function createChart(data) {
   });
 
   // Make the chart
-  const rankChart = new Chart(ctx, {
+  const rankChart = new Chart($chartCanvas, {
     type: 'horizontalBar',
 
     data: {
       labels,
       datasets: [
         {
-          label: 'Percentage',
+          label: '% Score',
           data: rankPercentages,
-          backgroundColor: 'rgba(255, 99, 132, 0.2)',
-          borderColor: 'rgba(255,99,132,1)',
+          backgroundColor: 'rgba(231, 76, 60, 0.7)',
+          hoverBackgroundColor: 'rgba(231, 76, 60, 0.9)',
+          borderColor: 'rgba(231, 76, 60, 1.0)',
           borderWidth: 1
         }
       ]
@@ -66,18 +76,29 @@ function createChart(data) {
             }
           }
         ],
+
         yAxes: [
           {
             // This constrains bar width
-            maxBarThickness: 80,
+            maxBarThickness: 100,
             gridLines: {
               display: false
             }
           }
         ]
       },
+
       legend: {
         display: false
+      },
+
+      tooltips: {
+        backgroundColor: 'rgba(255, 255, 255, 0.8)',
+
+        // The following is the chart.js default font color
+        titleFontColor: '#666666',
+        bodyFontColor: '#666666',
+        displayColors: false
       }
     }
   });
