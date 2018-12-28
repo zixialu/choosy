@@ -19,7 +19,7 @@ module.exports = knex => {
   router.get('/api/:id', (req, res) => {
     const findRanks = function(pollChoices) {
       console.log('choices data function input', pollChoices);
-      //Create an array of knex promises
+      // Create an array of knex promises
       return pollChoices.map(choice => {
         return knex
           .sum('rank')

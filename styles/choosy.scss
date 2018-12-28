@@ -51,6 +51,12 @@ body {
   font-size: 18pt;
 }
 
+// Headers
+h2 {
+  @extend %merriweather;
+  margin-top: 0;
+}
+
 // Main vote
 .poll-prompt {
   @extend %merriweather;
@@ -81,9 +87,6 @@ body {
 
 #create-poll {
   h2 {
-    @extend %merriweather;
-    margin-top: 0;
-
     .choose-style {
       color: #e74c3c;
     }
