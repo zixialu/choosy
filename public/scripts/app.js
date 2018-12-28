@@ -1,4 +1,8 @@
 $(function() {
+  // Hide alert box on page load
+  const $alertPanel = $('#form-alert');
+  $alertPanel.hide();
+
   //Ajax POST request on form submit on main page.
   let $pollForm = $('#create-poll');
   let $choices = $('#poll-choices')
@@ -8,7 +12,6 @@ $(function() {
     console.log('Submit button clicked!');
     event.preventDefault();
     // TODO: create helper function to validate submission
-
 
     // let formData = $pollForm.serialize();
 
@@ -38,6 +41,12 @@ $(function() {
           console.log('parsed data', parsedFormData)
           let newData = JSON.stringify(parsedFormData)
           $.post('/', newData, function(data, status) {
+
+            if (status === 'success') {
+              const managePath = 'http://localhost:8080/manage/';
+              location.href = managePath + data;
+              console.log(location.href);
+            }
       // console.log(data)// console.log("data that comes back from post request", data);
       //   let pollId = ***;
       //   // TODO: figure out how to get pollID from data sent back by POST req
@@ -49,7 +58,7 @@ $(function() {
     }
 
     //
-  });
+
 
   /*
    * The next event listener watch for interaction with the last choice input
