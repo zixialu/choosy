@@ -3,6 +3,8 @@
 const express = require('express');
 const router = express.Router();
 
+var CryptoJS = require('crypto-js');
+
 module.exports = knex => {
   let pollData;
   let choicesData = [];
@@ -11,12 +13,22 @@ module.exports = knex => {
   let publicId;
 
   // Manages initial GET request to /manage/:id
-  router.get('/:id', (req, res) => {
+  router.get('/:encryptedId', (req, res) => {
     res.render('manage');
   });
 
   // Manages AJAX GET request for data once document is ready
-  router.get('/api/:id', (req, res) => {
+  router.get('/api/:encryptedId', (req, res) => {
+    // Decrypt id
+    var bytes = CryptoJS.AES.decrypt(
+      decodeURIComponent(req.params.encryptedId),
+      process.env.AES_SECRET_KEY
+    );
+    const id = bytes.toString(CryptoJS.enc.Utf8);
+    console.log(
+      'unescaped id is ' + decodeURIComponent(req.params.encryptedId)
+    );
+
     const findRanks = function(pollChoices) {
       console.log('choices data function input', pollChoices);
       // Create an array of knex promises
@@ -76,8 +88,8 @@ module.exports = knex => {
       };
     };
 
-    console.log('params id', req.params.id);
-    pollId = req.params.id;
+    console.log('params id', id);
+    pollId = id;
 
     findPoll(pollId).then(poll => {
       pollData = poll;
@@ -130,6 +142,7 @@ module.exports = knex => {
   // Redirect to '/'
   router.get('/', (req, res) => {
     res.render('index');
+    // FIXME: This should be a redirect
   });
 
   return router;

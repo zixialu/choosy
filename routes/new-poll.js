@@ -5,6 +5,8 @@ const uuidv4 = require('uuid/v4');
 const express = require('express');
 const router = express.Router();
 
+var AES = require('crypto-js/aes');
+
 module.exports = knex => {
   // GET poll creation page
   router.get('/', (req, res) => {
@@ -21,30 +23,35 @@ module.exports = knex => {
     let pollChoices = [];
     let pollId;
 
-    Promise.all([insertPoller()])
-    .then(result => {
-      console.log('first promise', result)
-      const pollerId = parseInt(result[0][0])
-      insertPoll(pollerId)
-      .then(pollId => {
-        insertPollChoices(parseInt(pollId))
-        .then(res.send(pollId))
-      })
-    })
-
-    // return pollId;
+    Promise.all([insertPoller()]).then(result => {
+      console.log('first promise', result);
+      const pollerId = parseInt(result[0][0]);
+      insertPoll(pollerId).then(pollId => {
+        insertPollChoices(parseInt(pollId)).then(() => {
+          // Using pollId, return encrypted pollId
+          const encryptedId = AES.encrypt(
+            pollId.toString(),
+            process.env.AES_SECRET_KEY
+          );
+          res.status(201).send(encodeURIComponent(encryptedId));
+        });
+      });
+    });
 
     function insertPoller() {
       return knex('pollers')
         .returning('id')
-        .insert({email: req.body.email})
-    };
+        .insert({ email: req.body.email });
+    }
 
     function insertPoll(pollerId) {
       return knex('polls')
-      .insert({poller_id: pollerId, prompt: input.prompt, public_id: publicId})
-      .returning('id')
-
+        .insert({
+          poller_id: pollerId,
+          prompt: input.prompt,
+          public_id: publicId
+        })
+        .returning('id');
     }
 
     function insertPollChoices(id) {
@@ -52,10 +59,13 @@ module.exports = knex => {
       pollId = id;
     }
 
-
     function parseChoices(id) {
       for (let counter = 2; counter < keys.length; counter += 2) {
-        pollChoices.push({poll_id: id, title: input[keys[counter]], description: input[keys[counter + 1]]});
+        pollChoices.push({
+          poll_id: id,
+          title: input[keys[counter]],
+          description: input[keys[counter + 1]]
+        });
       }
       return pollChoices;
     }
@@ -63,7 +73,6 @@ module.exports = knex => {
     // .insert({email: input.email})
     // .returning('id')
     // .then(id => )
-
 
     // console.log("body of request", req.body);
 
