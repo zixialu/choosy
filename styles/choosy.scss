@@ -25,6 +25,7 @@ html {
   box-sizing: inherit;
 }
 
+// Media queries for responsive design
 @media (min-width: 768px) {
   .container {
     max-width: 730px;
@@ -34,6 +35,14 @@ html {
 body {
   @extend %merriweather-sans;
   padding-top: 65px;
+}
+
+.navbar {
+  // background: #263238;
+}
+
+.jumbotron {
+  background: #ecf0f1;
 }
 
 // Navbar
@@ -66,14 +75,14 @@ body {
 
 .input-group {
   width: 100%;
-  padding-bottom: 2em;
+  padding-top: 1em;
+  padding-bottom: 1em;
 }
 
 #create-poll {
   h2 {
     @extend %merriweather;
     margin-top: 0;
-    margin-bottom: 30px;
 
     .choose-style {
       color: #e74c3c;
