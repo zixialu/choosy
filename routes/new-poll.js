@@ -23,9 +23,9 @@ module.exports = knex => {
     let pollChoices = [];
     let pollId;
 
-    Promise.all([insertPoller()]).then(result => {
+    Promise.resolve(insertPoller()).then(result => {
       console.log('first promise', result);
-      const pollerId = parseInt(result[0][0]);
+      const pollerId = parseInt(result[0]);
       insertPoll(pollerId).then(pollId => {
         insertPollChoices(parseInt(pollId)).then(() => {
           // Using pollId, return encrypted pollId
@@ -41,7 +41,7 @@ module.exports = knex => {
     function insertPoller() {
       return knex('pollers')
         .returning('id')
-        .insert({ email: req.body.email });
+        .insert({ email: input.email });
     }
 
     function insertPoll(pollerId) {
