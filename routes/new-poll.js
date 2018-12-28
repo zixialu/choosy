@@ -16,21 +16,22 @@ module.exports = knex => {
   router.post('/', (req, res) => {
     //creates variable to hold the object sent from submit button
     let input = req.body;
-    let keys = Object.keys(input);
-    let publicId = uuidv4();
-    let pollChoices = [];
-    let pollId;
+    console.log("req body", input)
+    // let keys = Object.keys(input);
+    // let publicId = uuidv4();
+    // let pollChoices = [];
+    // let pollId;
 
-    Promise.all([insertPoller()])
-    .then(result => {
-      console.log('first promise', result)
-      const pollerId = parseInt(result[0][0])
-      insertPoll(pollerId)
-      .then(pollId => {
-        insertPollChoices(parseInt(pollId))
-        .then(res.send(pollId))
-      })
-    })
+    // Promise.all([insertPoller()])
+    // .then(result => {
+    //   console.log('first promise', result)
+    //   const pollerId = parseInt(result[0][0])
+    //   insertPoll(pollerId)
+    //   .then(pollId => {
+    //     insertPollChoices(parseInt(pollId))
+    //     .then(res.send(pollId))
+    //   })
+    // })
 
     // return pollId;
 
