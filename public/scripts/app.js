@@ -1,4 +1,8 @@
 $(function() {
+  // Hide alert box on page load
+  const $alertPanel = $('#form-alert');
+  $alertPanel.hide();
+
   //Ajax POST request on form submit on main page.
   let $pollForm = $('#create-poll');
 

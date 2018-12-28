@@ -9,33 +9,27 @@
 
     <!-- Normalize -->
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-
     <!-- Google Fonts -->
     <link
       href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700|Merriweather:400,400i,900i"
       rel="stylesheet"
     />
-
     <!-- Bootstrap -->
-    <!-- Latest compiled and minified CSS -->
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
       integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
       crossorigin="anonymous"
     />
-
     <!-- Optional Bootstrap theme -->
-    <link
+    <!-- <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
       integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
       crossorigin="anonymous"
-    />
-
+    /> -->
     <!-- Custom override -->
     <link href="/styles/choosy.css" rel="stylesheet" />
-
   </head>
 
   <body>
@@ -77,18 +71,18 @@
         <!-- Share public link -->
         <form>
           <div class="input-group">
-            <span class="input-group-addon">
-                Share poll:
-            </span>
+            <span class="input-group-addon"> Share poll: </span>
 
-            <input type="text" class="form-control" id="copy-input">
+            <input type="text" class="form-control" id="copy-input" />
 
             <span class="input-group-btn">
-              <button class="btn btn-default"
+              <button
+                class="btn btn-default"
                 type="button"
                 id="copy-button"
                 data-clipboard-target="#copy-input"
-                title="Copy to Clipboard">
+                title="Copy to Clipboard"
+              >
                 <span class="glyphicon glyphicon-copy"></span>
               </button>
             </span>
@@ -114,6 +108,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
 
     <script src="/scripts/manage.js"></script>
-
   </body>
 </html>
