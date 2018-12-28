@@ -2,6 +2,23 @@ $(document).ready(function() {
   const url = window.location.href;
   const pollId = url.substring(url.lastIndexOf('/') + 1);
 
+  // Set up the copy link button
+  const $copyButton = $('#copy-button');
+  const clipboard = new ClipboardJS('#copy-button');
+
+  // Set up the tooltip
+  $copyButton.tooltip();
+
+  // Copy success handler
+  // Update the tooltip
+  clipboard.on('success', e => {
+    $copyButton
+      .attr('title', 'Copied!')
+      .tooltip('fixTitle')
+      .tooltip('show');
+  });
+
+  // Ajax request to get the poll data
   $.ajax({
     type: 'get',
     url: `/manage/api/${pollId}`,
@@ -24,6 +41,12 @@ function updateData(id) {
 
 function createChart(data) {
   const $chartCanvas = $('#poll-results');
+
+  // Add the public link to the copy input
+  // TODO: Change this for heroku
+  const votePath = 'http://localhost:8080/vote/';
+  const publicLink = data.parsedPublicId;
+  $('#copy-input').attr('value', votePath + publicLink);
 
   // Resize canvas to fit any number of options
   // These heights are just rough estimates

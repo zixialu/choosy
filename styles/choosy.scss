@@ -75,14 +75,14 @@ body {
 
 .input-group {
   width: 100%;
-  padding-bottom: 2em;
+  padding-top: 1em;
+  padding-bottom: 1em;
 }
 
 #create-poll {
   h2 {
     @extend %merriweather;
     margin-top: 0;
-    margin-bottom: 30px;
 
     .choose-style {
       color: #e74c3c;

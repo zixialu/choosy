@@ -54,15 +54,26 @@ module.exports = knex => {
       let parsedPrompt = poll.prompt;
       let parsedChoices = [];
       let parsedDescriptions = [];
+
+      let parsedPublicId = poll.public_id;
+
       choices.forEach(choice => {
         parsedChoices.push(choice.title);
         parsedDescriptions.push(choice.description);
       });
+
       let parsedRanks = [];
+
       ranks.forEach(rank => {
         parsedRanks.push(parseInt(rank[0].sum));
       });
-      return { parsedPrompt, parsedChoices, parsedDescriptions, parsedRanks };
+      return {
+        parsedPrompt,
+        parsedChoices,
+        parsedDescriptions,
+        parsedRanks,
+        parsedPublicId
+      };
     };
 
     console.log('params id', req.params.id);
