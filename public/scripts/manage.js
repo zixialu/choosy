@@ -18,6 +18,12 @@ $(document).ready(function() {
       .tooltip('show');
   });
 
+  // Keep a reference to the chart
+  let rankChart;
+
+  // Keep a reference to the interval timer
+  let updateTimer;
+
   // Ajax request to get the poll data
   $.ajax({
     type: 'get',
@@ -27,17 +33,19 @@ $(document).ready(function() {
       const $promptHeader = $('.poll-prompt');
       $promptHeader.text(data.parsedPrompt);
 
-      createChart(data);
+      rankChart = createChart(data);
+    },
+    complete: function() {
+      /*
+       * FIXME: This does not work in IE9, use an anonymous function to pass
+       * params instead. Refer to setInterval docs for more information.
+       */
+      if (!updateTimer) {
+        updateTimer = setInterval(updateData, 5000, rankChart, pollId);
+      }
     }
-    // complete: function() {
-    //   setTimeout(updateData(id), 5000);
-    // }
   });
 });
-
-function updateData(id) {
-  // TODO: Use chart.js.update() and another ajax request to update the poll results
-}
 
 function createChart(data) {
   const $chartCanvas = $('#poll-results');
@@ -70,7 +78,7 @@ function createChart(data) {
   });
 
   // Make the chart
-  const rankChart = new Chart($chartCanvas, {
+  return new Chart($chartCanvas, {
     type: 'horizontalBar',
 
     data: {
@@ -125,6 +133,34 @@ function createChart(data) {
         borderColor: 'rgba(231, 76, 60, 1.0)',
         borderWidth: 1
       }
+    }
+  });
+}
+
+// Update the poll results through ajax
+function updateData(chart, id) {
+  console.log('Updating chart...', Date());
+
+  // Make an ajax request to get new data
+  // TODO: Refactor this and the original ajax request to be more DRY
+  $.ajax({
+    type: 'get',
+    url: `/manage/api/${id}`,
+    success: function(data) {
+      // Construct the new data
+      // TODO: Refactor this and createChart() to be more DRY
+      const total = data.parsedRanks.reduce((acc, cur) => acc + cur);
+      const rankPercentages = data.parsedRanks.map(rank => {
+        return ((rank / total) * 100).toFixed(2);
+      });
+
+      // Then, push the new data
+      chart.data.datasets.forEach(dataset => {
+        dataset.data = rankPercentages;
+      });
+
+      // Finally, update the chart
+      chart.update();
     }
   });
 }
