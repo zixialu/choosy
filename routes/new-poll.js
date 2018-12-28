@@ -31,7 +31,9 @@ module.exports = knex => {
       });
     });
 
-    // TODO: Using pollId, redirect to manage page
+    // Using pollId, redirect to manage page
+    const encryptedId = AES.encrypt(pollId, process.env.AES_SECRET_KEY);
+    res.redirect(303, `/manage/${encryptedId}`);
 
     function insertPoller() {
       return knex('pollers')
