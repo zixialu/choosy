@@ -40,7 +40,9 @@ $(document).ready(function() {
        * FIXME: This does not work in IE9, use an anonymous function to pass
        * params instead. Refer to setInterval docs for more information.
        */
-      updateTimer = setInterval(updateData, 5000, rankChart, pollId);
+      if (!updateTimer) {
+        updateTimer = setInterval(updateData, 5000, rankChart, pollId);
+      }
     }
   });
 });
