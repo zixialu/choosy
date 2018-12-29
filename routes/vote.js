@@ -38,14 +38,16 @@ module.exports = knex => {
       // Create and return new vote
       .then(results => {
         const pollId = results[0].id;
+        console.log('results', results)
         insertVote(pollId)
           // Insert new pollChoicesVotes
           .then(vote => {
             //FIXME: vote ID not getting saved to poll_choices_votes
-            voteId = vote.id;
+            console.log('vote', vote)
+            voteId = vote[0].id;
+            console.log('vote id', voteId)
             // Poll choices/votes join table
             // TODO: Insert each choice rank into poll_choices_votes
-            console.log('vote', vote);
             const promises = JSON.parse(req.body.pollChoices).map(choice => {
               const { choiceId, rank } = choice;
               return knex('poll_choices_votes')
