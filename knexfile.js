@@ -30,6 +30,7 @@ module.exports = {
     migrations: {
       directory: './db/migrations',
       tableName: 'migrations'
-    }
+    },
+    ssl: true
   }
 };
