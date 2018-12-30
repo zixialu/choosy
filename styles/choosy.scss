@@ -45,13 +45,18 @@ body {
   background: #ecf0f1;
 }
 
-// Navbar
+// Branding
 .navbar-brand {
   @extend %merriweather;
   font-size: 18pt;
 }
 
+.choose-style {
+  color: #e74c3c;
+}
+
 // Headers
+h1,
 h2 {
   @extend %merriweather;
   margin-top: 0;
@@ -75,10 +80,6 @@ h2 {
 }
 
 // Main new poll
-.poll-prompt {
-  @extend %merriweather;
-}
-
 .input-group {
   width: 100%;
   padding-top: 1em;
@@ -86,12 +87,6 @@ h2 {
 }
 
 #create-poll {
-  h2 {
-    .choose-style {
-      color: #e74c3c;
-    }
-  }
-
   #option-info {
     @extend %merriweather;
     font-weight: 400;
