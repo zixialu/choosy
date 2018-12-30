@@ -52,7 +52,9 @@ function createChart(data) {
 
   // Add the public link to the copy input
   // TODO: Change this for heroku
-  const votePath = 'http://localhost:8080/vote/';
+  const votePath = `${window.location.protocol}//${window.location.pathname}${
+    window.location.port ? `:${window.location.port}` : ''
+  }/vote/`;
   const publicLink = data.parsedPublicId;
   $('#copy-input').attr('value', votePath + publicLink);
 
