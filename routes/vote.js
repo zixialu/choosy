@@ -7,6 +7,11 @@ module.exports = knex => {
   let pollData;
   let choicesData = [];
 
+  // Thank you for voting
+  router.get('/done', (req, res) => {
+    res.render('thanks');
+  });
+
   //Manages initial GET request to /vote/:id
   router.get('/:id', (req, res) => {
     res.render('vote');
@@ -60,11 +65,6 @@ module.exports = knex => {
             });
           });
       });
-  });
-
-  // Thank you for voting
-  router.get('/done', (req, res) => {
-    res.render('thanks');
   });
 
   // FIXME: Redirect to '/'
