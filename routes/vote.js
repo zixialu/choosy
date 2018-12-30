@@ -67,9 +67,9 @@ module.exports = knex => {
       });
   });
 
-  // FIXME: Redirect to '/'
+  // Redirect to '/'
   router.get('/', (req, res) => {
-    res.render('index');
+    res.redirect('/');
   });
 
   return router;

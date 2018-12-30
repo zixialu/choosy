@@ -141,8 +141,7 @@ module.exports = knex => {
 
   // Redirect to '/'
   router.get('/', (req, res) => {
-    res.render('index');
-    // FIXME: This should be a redirect
+    res.redirect('/');
   });
 
   return router;
