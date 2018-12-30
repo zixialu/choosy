@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "local": "./node_modules/.bin/nodemon --ignore public/",
-    "knex": "./node_modules/.bin/knex"
+    "knex": "./node_modules/.bin/knex",
+    "heroku-postbuild": "npm knex migrate:latest"
   },
   "author": "Lighthouse Labs",
   "license": "ISC",
