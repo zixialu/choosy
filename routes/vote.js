@@ -38,14 +38,14 @@ module.exports = knex => {
       // Create and return new vote
       .then(results => {
         const pollId = results[0].id;
-        console.log('results', results)
+        console.log('results', results);
         insertVote(pollId)
           // Insert new pollChoicesVotes
           .then(vote => {
             //FIXME: vote ID not getting saved to poll_choices_votes
-            console.log('vote', vote)
+            console.log('vote', vote);
             voteId = vote[0].id;
-            console.log('vote id', voteId)
+            console.log('vote id', voteId);
             // Poll choices/votes join table
             // TODO: Insert each choice rank into poll_choices_votes
             const promises = JSON.parse(req.body.pollChoices).map(choice => {
@@ -59,17 +59,17 @@ module.exports = knex => {
                 .returning('*');
             });
             // .then(() => {
-              Promise.all(promises).then(results => {
+            Promise.all(promises).then(results => {
               // TODO: Resolve, maybe redirect to another page
               console.log('Submitted vote!');
               res.status(201).send('Thanks for voting!');
-            // });
+              // });
             });
           });
       });
   });
 
-  // Redirect to '/'
+  // FIXME: Redirect to '/'
   router.get('/', (req, res) => {
     res.render('index');
   });
