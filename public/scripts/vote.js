@@ -66,7 +66,7 @@ $(document).ready(function() {
       url: `/vote/${publicId}`,
       data: { pollChoices: JSON.stringify(pollChoices) }
     }).done(() => {
-      // TODO: Implement callback for after form is posted
+      location.href = '/vote/done';
     });
   });
 });
