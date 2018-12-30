@@ -1,6 +1,4 @@
-if (app.get('env') == 'development') {
-  require('dotenv').config();
-}
+require('dotenv').config();
 
 module.exports = {
   development: {
