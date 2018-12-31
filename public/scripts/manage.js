@@ -37,7 +37,8 @@ $(document).ready(function() {
     },
     error: function() {
       // TODO: Redirect to a 404 page
-      location.href = '/';
+      console.log('404 redirect');
+      location.href = '/404';
     },
     complete: function() {
       /*

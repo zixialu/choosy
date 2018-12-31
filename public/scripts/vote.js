@@ -8,6 +8,10 @@ $(document).ready(function() {
     res.pollChoices.forEach(choice => {
       appendChoice(choice);
     });
+  }).fail(err => {
+    // TODO: Redirect to a 404 page
+    console.log('error 404 redirect');
+    location.href = '/404';
   });
 
   function populatePrompt(prompt) {
@@ -64,11 +68,7 @@ $(document).ready(function() {
     $.ajax({
       method: 'PUT',
       url: `/vote/${publicId}`,
-      data: { pollChoices: JSON.stringify(pollChoices) },
-      error: function() {
-        // TODO: Redirect to a 404 page
-        location.href = '/';
-      }
+      data: { pollChoices: JSON.stringify(pollChoices) }
     }).done(() => {
       location.href = '/vote/done';
     });

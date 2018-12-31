@@ -18,6 +18,7 @@ const knexLogger = require('knex-logger');
 const newPollRoutes = require('./routes/new-poll')(knex);
 const manageRoutes = require('./routes/manage')(knex);
 const voteRoutes = require('./routes/vote')(knex);
+const error404Routes = require('./routes/404')(knex);
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -44,6 +45,7 @@ app.use(express.static('public'));
 app.use('/', newPollRoutes);
 app.use('/manage', manageRoutes);
 app.use('/vote', voteRoutes);
+app.use('/404', error404Routes);
 
 // Home page
 // app.get('/', (req, res) => {
