@@ -91,10 +91,18 @@ module.exports = knex => {
     console.log('params id', id);
     pollId = id;
 
-    findPoll(pollId).then(poll => {
-      pollData = poll;
-      console.log('this is the poll data', pollData);
-    });
+    // FIXME: The Promise.all should be chained to findPoll as the res.json
+    // depends on findPoll's result
+    findPoll(pollId)
+      .then(poll => {
+        pollData = poll;
+        console.log('this is the poll data', pollData);
+      })
+      .catch(err => {
+        // Assume id is bad and return a 404
+        // TODO: Handle different errors differently
+        res.status(404).send();
+      });
 
     Promise.all([findPollChoices(pollId), findVotes(pollId)]).then(results => {
       choicesData = results[0];
@@ -141,8 +149,7 @@ module.exports = knex => {
 
   // Redirect to '/'
   router.get('/', (req, res) => {
-    res.render('index');
-    // FIXME: This should be a redirect
+    res.redirect('/');
   });
 
   return router;

@@ -21,14 +21,20 @@ module.exports = knex => {
   router.get('/api/:id', (req, res) => {
     let publicId = req.params.id;
 
-    findPoll(publicId).then(poll => {
-      Promise.all([getPrompt(poll), findPollChoices(poll)]).then(result => {
-        const prompt = result[0];
-        const pollChoices = result[1];
+    findPoll(publicId)
+      .then(poll => {
+        Promise.all([getPrompt(poll), findPollChoices(poll)]).then(result => {
+          const prompt = result[0];
+          const pollChoices = result[1];
 
-        res.json({ prompt, pollChoices });
+          res.json({ prompt, pollChoices });
+        });
+      })
+      .catch(err => {
+        // Assume id is bad and return a 404
+        // TODO: Handle different errors differently
+        res.status(404).send();
       });
-    });
   });
 
   // PUT new vote
@@ -67,9 +73,9 @@ module.exports = knex => {
       });
   });
 
-  // FIXME: Redirect to '/'
+  // Redirect to '/'
   router.get('/', (req, res) => {
-    res.render('index');
+    res.redirect('/');
   });
 
   return router;

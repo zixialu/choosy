@@ -8,6 +8,10 @@ $(document).ready(function() {
     res.pollChoices.forEach(choice => {
       appendChoice(choice);
     });
+  }).fail(err => {
+    // TODO: Redirect to a 404 page
+    console.log('error 404 redirect');
+    location.href = '/404';
   });
 
   function populatePrompt(prompt) {
