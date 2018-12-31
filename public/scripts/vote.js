@@ -64,7 +64,11 @@ $(document).ready(function() {
     $.ajax({
       method: 'PUT',
       url: `/vote/${publicId}`,
-      data: { pollChoices: JSON.stringify(pollChoices) }
+      data: { pollChoices: JSON.stringify(pollChoices) },
+      error: function() {
+        // TODO: Redirect to a 404 page
+        location.href = '/';
+      }
     }).done(() => {
       location.href = '/vote/done';
     });

@@ -35,6 +35,10 @@ $(document).ready(function() {
 
       rankChart = createChart(data);
     },
+    error: function() {
+      // TODO: Redirect to a 404 page
+      location.href = '/';
+    },
     complete: function() {
       /*
        * FIXME: This does not work in IE9, use an anonymous function to pass
