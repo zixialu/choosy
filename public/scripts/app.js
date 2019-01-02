@@ -11,14 +11,16 @@ $(function() {
   $pollForm.submit(function(event) {
     console.log('Submit button clicked!');
     event.preventDefault();
-    // TODO: create helper function to validate submission
-
-    // let formData = $pollForm.serialize();
-
     let formData = jQuery($pollForm).serializeArray();
     let parsedFormData = {};
-    console.log('input', formData);
-    formValidation(formData);
+
+    if ($alerPanel.is(':visible')) {
+      $alertPanel.slideUp('slow', function () {
+        formValidation(formData);
+      });
+    } else {
+      formValidation(formData)
+    }
 
     function formValidation(data) {
       if (!data[0].value) {
@@ -26,11 +28,9 @@ $(function() {
         $('#form-alert .panel-body').text(
           'Please write a prompt for your poll'
         );
-        console.log('Please write a prompt for your poll');
       } else if (!data[1].value) {
         $alertPanel.slideToggle();
-        $('form-alert .panel-body').text('Please insert a valid email address');
-        console.log('Please insert a valid email address');
+        $('#form-alert .panel-body').text('Please insert a valid email address');
       } else {
         parsedFormData[data[0].name] = data[0].value;
         parsedFormData[data[1].name] = data[1].value;
@@ -47,14 +47,6 @@ $(function() {
         } else {
           console.log('parsed data', parsedFormData);
           $.post('/', parsedFormData, function(data, status) {
-            // console.log(data)// console.log("data that comes back from post request", data);
-            //   let pollId = ***;
-            //   // TODO: figure out how to get pollID from data sent back by POST req
-            //   // TODO: figure out how to hash pollID
-            //   res.redirect('/manage/:pollId');
-
-            // Redirect to manage page on successful post
-            // TODO: put this in the AJAX success block?
             if (status === 'success') {
               const managePath = '/manage/';
               location.href = managePath + data;
