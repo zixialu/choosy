@@ -1,11 +1,13 @@
 'use strict';
 
 const uuidv4 = require('uuid/v4');
-
 const express = require('express');
 const router = express.Router();
-
-var AES = require('crypto-js/aes');
+const AES = require('crypto-js/aes');
+const api_key = 'f404e6957acba7811ed9226324134cfb-49a2671e-d19101fe';
+const domain = 'sandboxe68219f726034186a6ff2f5cbe3fdc95.mailgun.org';
+const mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
+const MailComposer = require('nodemailer/lib/mail-composer')
 
 module.exports = knex => {
   // GET poll creation page
@@ -23,17 +25,45 @@ module.exports = knex => {
     let pollChoices = [];
     let pollId;
 
-    Promise.resolve(insertPoller()).then(result => {
-      console.log('first promise', result);
+    Promise.resolve(insertPoller())
+    .then(result => {
       const pollerId = parseInt(result[0]);
-      insertPoll(pollerId).then(pollId => {
-        insertPollChoices(parseInt(pollId)).then(() => {
+      insertPoll(pollerId)
+      .then(pollId => {
+        insertPollChoices(parseInt(pollId))
+        .then(() => {
           // Using pollId, return encrypted pollId
           const encryptedId = AES.encrypt(
             pollId.toString(),
             process.env.AES_SECRET_KEY
           );
           res.status(201).send(encodeURIComponent(encryptedId));
+          .then(() => {
+            let data = {
+              from: 'Choosy <umair.abdulq@gmail.com>',
+              to: `${input.email}`,
+              subject: 'Your Choosy Poll!',
+              html: `
+              <h1>Your new Choosy poll has been created!</h1>
+              <p><a href="http://localhost:8080/manage/${encryptedId}">Click here</a> to track your poll results</p>
+              <p><a href="http://localhost:8080/vote/${publicId}">Share this link</a> to ask your friends, family and/or colleagues to help you be Choosy.</p>
+              `
+            }
+            let mail = new MailComposer(data);
+
+            mail.compile().build((err, message) => {
+              var dataToSend = {
+                to: `${input.email}`
+                message: message.toString('ascii')
+              };
+              mailgun.messages().sendMime(dataToSend, (sendError, body) => {
+                if (sendError) {
+                  console.log(sendError);
+                  return;
+                }
+              });
+            });
+          });
         });
       });
     });
@@ -69,66 +99,6 @@ module.exports = knex => {
       }
       return pollChoices;
     }
-    // knex('pollers')
-    // .insert({email: input.email})
-    // .returning('id')
-    // .then(id => )
-
-    // console.log("body of request", req.body);
-
-    // TODO: Generate/pull all poll parameters out from the request as follows:
-    // TODO: Refactor db interfacing logic out to a data-helpers function
-
-    // Poller
-    // const pollerEmail = req.body.email;
-    // /*
-    //  * TODO: Lookup pollers by email to see if pollers already exists, and use
-    //  * its id if it does; insert a new poller otherwise.
-    //  * Also update email column in pollers table to be indexed to facilitate
-    //  * fast frequent searching
-    //  */
-    // // Insert new poller
-    // knex('pollers')
-    //   .insert({
-    //     email: pollerEmail
-    //   })
-    //   .returning('*')
-    //   .then(poller => {
-    //     // Poll
-    //     const prompt = req.body.prompt;
-    //     const createDate = Date();
-    //     // TODO: Stretch: set a close date if applicable
-    //     const closeDate = null;
-    //     const publicId = uuidv4();
-
-    //     // Insert new poll
-    //     knex('polls')
-    //       .insert({
-    //         poller_id: poller.id,
-    //         prompt,
-    //         create_date: createDate,
-    //         close_date: closeDate,
-    //         public_id: publicId
-    //       })
-    //       .returning('*');
-    //   })
-    //   .then(poll => {
-    //     // Poll choices
-    //     // TODO: Implement this based on how choices are structured in the form
-    //     req.body.pollChoices.forEach(choice => {
-    //       const { title, description } = choice;
-
-    //       // Insert new poll choice
-    //       knex('poll_choices').insert({
-    //         poll_id: poll.id,
-    //         title,
-    //         description
-    //       });
-    //     });
-    //   })
-    //   .catch(err => {
-    //     // TODO: Catch errors
-    //   });
   });
 
   return router;
