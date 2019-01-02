@@ -93,21 +93,6 @@ body {
   // background: $white;
 }
 
-.btn-primary {
-  background-color: $tomato;
-  color: $white;
-  border-color: $tomato;
-
-  &:hover {
-    background-color: $white;
-    color: $tomato;
-    border-color: $tomato;
-    // background-color: $jalapeno;
-    // color: $white;
-    // border-color: $white;
-  }
-}
-
 .choosy-style {
   color: $tomato;
 }
@@ -174,6 +159,16 @@ h2 {
 .btn {
   @extend %merriweather;
   font-weight: 400;
+
+  background-color: $tomato;
+  color: $white;
+  border-color: $tomato;
+
+  &:hover {
+    background-color: $white;
+    color: $tomato;
+    border-color: $tomato;
+  }
 }
 
 // Main manage
