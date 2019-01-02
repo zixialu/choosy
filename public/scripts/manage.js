@@ -35,6 +35,11 @@ $(document).ready(function() {
 
       rankChart = createChart(data);
     },
+    error: function() {
+      // TODO: Redirect to a 404 page
+      console.log('404 redirect');
+      location.href = '/404';
+    },
     complete: function() {
       /*
        * FIXME: This does not work in IE9, use an anonymous function to pass
@@ -52,7 +57,9 @@ function createChart(data) {
 
   // Add the public link to the copy input
   // TODO: Change this for heroku
-  const votePath = 'http://localhost:8080/vote/';
+  const votePath = `${window.location.protocol}//${window.location.hostname}${
+    window.location.port ? `:${window.location.port}` : ''
+  }/vote/`;
   const publicLink = data.parsedPublicId;
   $('#copy-input').attr('value', votePath + publicLink);
 

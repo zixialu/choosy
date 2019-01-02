@@ -48,7 +48,7 @@ $(function() {
           console.log('parsed data', parsedFormData);
           $.post('/', parsedFormData, function(data, status) {
             if (status === 'success') {
-              const managePath = 'http://localhost:8080/manage/';
+              const managePath = '/manage/';
               location.href = managePath + data;
               console.log(location.href);
             }
@@ -56,7 +56,6 @@ $(function() {
         }
       }
     }
-
   });
 
   /*

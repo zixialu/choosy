@@ -11,8 +11,12 @@ module.exports = knex => {
   let pollData;
   let choicesData = [];
 
+  // Thank you for voting
+  router.get('/done', (req, res) => {
+    res.render('thanks');
+  });
+
   //Manages initial GET request to /vote/:id
-  // TODO: This uses ejs right now, decide whether to do it like this or use jquery instead
   router.get('/:id', (req, res) => {
     res.render('vote');
   });
@@ -21,19 +25,24 @@ module.exports = knex => {
   router.get('/api/:id', (req, res) => {
     let publicId = req.params.id;
 
-    findPoll(publicId).then(poll => {
-      Promise.all([getPrompt(poll), findPollChoices(poll)]).then(result => {
-        const prompt = result[0];
-        const pollChoices = result[1];
+    findPoll(publicId)
+      .then(poll => {
+        Promise.all([getPrompt(poll), findPollChoices(poll)]).then(result => {
+          const prompt = result[0];
+          const pollChoices = result[1];
 
-        res.json({ prompt, pollChoices });
+          res.json({ prompt, pollChoices });
+        });
+      })
+      .catch(err => {
+        // Assume id is bad and return a 404
+        // TODO: Handle different errors differently
+        res.status(404).send();
       });
-    });
   });
 
   // PUT new vote
   router.put('/:id', (req, res) => {
-    // TODO: Pull all vote parameters out from request body
     // Vote
     const publicId = req.params.id;
     let voteId;
@@ -46,10 +55,9 @@ module.exports = knex => {
         insertVote(pollId)
           // Insert new pollChoicesVotes
           .then(vote => {
-            //FIXME: vote ID not getting saved to poll_choices_votes
             voteId = vote[0].id;
+          
             // Poll choices/votes join table
-            // TODO: Insert each choice rank into poll_choices_votes
             const promises = JSON.parse(req.body.pollChoices).map(choice => {
               const { choiceId, rank } = choice;
               return knex('poll_choices_votes')
@@ -103,7 +111,7 @@ module.exports = knex => {
 
   // Redirect to '/'
   router.get('/', (req, res) => {
-    res.render('index');
+    res.redirect('/');
   });
 
   return router;

@@ -3,11 +3,15 @@ $(document).ready(function() {
   const url = window.location.href;
   const publicId = url.substring(url.lastIndexOf('/') + 1);
   $.get(`/vote/api/${publicId}`, res => {
-    // TODO: Insert data into page
+    // Insert data into page
     populatePrompt(res.prompt);
     res.pollChoices.forEach(choice => {
       appendChoice(choice);
     });
+  }).fail(err => {
+    // Redirect to a 404 page on fail
+    console.log('error 404 redirect');
+    location.href = '/404';
   });
 
   function populatePrompt(prompt) {
@@ -18,8 +22,11 @@ $(document).ready(function() {
   function appendChoice(choice) {
     const rawHTML = `
       <li class="list-group-item ui-state-default">
-        <h4>${choice.title}</h4>
-        <section>${choice.description}</section>
+        <i class="material-icons md-36 md-dark">drag_handle</i>
+        <span>
+          <h4>${choice.title}</h4>
+          <section>${choice.description}</section>
+        </span>
       </li>
       `;
     const $newElement = $($.parseHTML(rawHTML));
@@ -31,12 +38,10 @@ $(document).ready(function() {
 
   // Drag and drop list
   $('#sortable').sortable({
-    // axis: 'y',
     containment: 'parent',
     cursor: 'move',
     distance: 5,
-    // This blocks dragging while it drifts into place; remove for UX reasons?
-    // revert: true,
+
     // This can get buggy if elements are different sizes
     tolerance: 'pointer'
   });
@@ -59,14 +64,12 @@ $(document).ready(function() {
       });
     });
 
-    // TODO: Validation
-    // TODO: Serialize the data?
     $.ajax({
       method: 'PUT',
       url: `/vote/${publicId}`,
       data: { pollChoices: JSON.stringify(pollChoices) }
     }).done(() => {
-      // TODO: Implement callback for after form is posted
+      location.href = '/vote/done';
     });
   });
 });
