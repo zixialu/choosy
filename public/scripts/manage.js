@@ -93,9 +93,9 @@ function createChart(data) {
         {
           label: '% Score',
           data: rankPercentages,
-          backgroundColor: '#eb2f06b2',
-          hoverBackgroundColor: '#eb2f06',
-          borderColor: '#eb2f06',
+          backgroundColor: '#da435fb2',
+          hoverBackgroundColor: '#da435f',
+          borderColor: '#da435f',
           borderWidth: 1
         }
       ]
@@ -135,7 +135,7 @@ function createChart(data) {
         titleFontColor: '#666666',
         bodyFontColor: '#666666',
         displayColors: false,
-        borderColor: 'rgba(231, 76, 60, 1.0)',
+        borderColor: '#da435f',
         borderWidth: 1
       }
     }
