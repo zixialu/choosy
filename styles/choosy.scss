@@ -11,9 +11,24 @@
 }
 
 $white: #ffffff;
-$tomato: #eb2f06;
+// $tomato: #eb2f06;
+// $tomato: #e03856;
+$tomato: #da435f;
+// $tomato: #cf6766;
 $tomato-dark: #d62b06;
-$text-color: #332826;
+// $text-color: #332826;
+$text-color: #f4fcf5;
+// $dark: #2b2929;
+// $gray: #4f494a;
+$gray: #2b2929;
+$dark: #262e41;
+$border: #0fdbff;
+$hover: #aff3ff;
+$hover-dark: #85aab6;
+
+%border-thin {
+  border: 1px solid $hover-dark;
+}
 
 /*
  * http://www.paulirish.com/2012/box-sizing-border-box-ftw/
@@ -73,24 +88,39 @@ body {
   @extend %merriweather-sans;
 
   // Leave room for navbar
-  padding-top: 65px;
+  padding-top: 80px;
 
   color: $text-color;
+
+  background: $dark;
+}
+
+.jumbotron {
+  background: $gray;
+  border: 1px solid $hover;
 }
 
 .navbar {
   // background: linear-gradient($tomato 50%, $tomato-dark);
-  // border: none;
+  background: $tomato;
+  border-color: $hover;
+  border-width: 0 0 2px;
+  min-height: 64px;
 
   .navbar-brand {
     @extend %merriweather;
-    font-size: 18pt;
-    color: $white;
+    font-size: 24pt;
+    line-height: 27px;
+    color: $hover;
+
+    &:hover {
+      color: $white;
+    }
   }
 }
 
 .choosy-style {
-  color: $tomato;
+  color: $hover;
 }
 
 // Headers
@@ -118,6 +148,9 @@ h2 {
   .list-group-item {
     display: flex;
     align-items: center;
+
+    background: $hover;
+    @extend %border-thin;
 
     .material-icons {
       margin-inline-end: 0.5em;
@@ -153,19 +186,36 @@ h2 {
   }
 }
 
+.panel-body {
+  color: #333;
+}
+
 .btn {
   @extend %merriweather;
   font-weight: 400;
 
   background-color: $tomato;
   color: $white;
-  border-color: $tomato;
+  border-color: $hover;
+  border-width: 1px;
 
-  &:hover {
-    background-color: $white;
+  &:hover,
+  &:focus,
+  &:active:focus {
+    background-color: $hover;
     color: $tomato;
     border-color: $tomato;
+    border-width: 1px;
   }
+}
+
+.input-group-addon {
+  background: $hover;
+}
+
+.input-group-addon,
+.form-control {
+  @extend %border-thin;
 }
 
 // Main manage

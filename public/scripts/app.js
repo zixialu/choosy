@@ -42,10 +42,11 @@ $(function() {
             parsedFormData[data[counter + 1].name] = data[counter + 1].value;
           }
         }
-        if (parsedFormData.length <= 4) {
+        if (Object.keys(parsedFormData).length <= 4) {
           $('#form-alert .panel-body').text(
             'Please create a poll with at least two options'
           );
+          $alertPanel.slideToggle();
         } else {
           console.log('parsed data', parsedFormData);
           $.post('/', parsedFormData, function(data, status) {
