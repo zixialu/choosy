@@ -98,7 +98,7 @@ module.exports = knex => {
 
                 mail.compile().build((err, message) => {
                   var dataToSend = {
-                    to: `${input.email}`,
+                    to: email,
                     message: message.toString('ascii')
                   };
                   mailgun.messages().sendMime(dataToSend, (sendError, body) => {

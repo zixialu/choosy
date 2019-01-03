@@ -34,35 +34,31 @@ module.exports = knex => {
             pollId.toString(),
             process.env.AES_SECRET_KEY
           );
-          res
-            .status(201)
-            .send(encodeURIComponent(encryptedId))
-            .then(() => {
-              let data = {
-                from: 'Choosy <umair.abdulq@gmail.com>',
-                to: `${input.email}`,
-                subject: 'Your Choosy Poll!',
-                html: `
+          res.status(201).send(encodeURIComponent(encryptedId));
+          let data = {
+            from: 'Choosy <umair.abdulq@gmail.com>',
+            to: `${input.email}`,
+            subject: 'Your Choosy Poll!',
+            html: `
               <h1>Your new Choosy poll has been created!</h1>
               <p><a href="http://localhost:8080/manage/${encryptedId}">Click here</a> to track your poll results</p>
               <p><a href="http://localhost:8080/vote/${publicId}">Share this link</a> to ask your friends, family and/or colleagues to help you be Choosy.</p>
               `
-              };
-              let mail = new MailComposer(data);
+          };
+          let mail = new MailComposer(data);
 
-              mail.compile().build((err, message) => {
-                var dataToSend = {
-                  to: `${input.email}`,
-                  message: message.toString('ascii')
-                };
-                mailgun.messages().sendMime(dataToSend, (sendError, body) => {
-                  if (sendError) {
-                    console.log(sendError);
-                    return;
-                  }
-                });
-              });
+          mail.compile().build((err, message) => {
+            var dataToSend = {
+              to: `${input.email}`,
+              message: message.toString('ascii')
+            };
+            mailgun.messages().sendMime(dataToSend, (sendError, body) => {
+              if (sendError) {
+                console.log(sendError);
+                return;
+              }
             });
+          });
         });
       });
     });
