@@ -10,11 +10,11 @@ function sendNewPollEmail(email, encryptedId, publicId) {
   let data = {
     from: 'Choosy <umair.abdulq@gmail.com>',
     to: `${email}`,
-    subject: 'Your Choosy Poll!',
+    subject: 'New Choosy Poll!',
     html: `
-      <h1>Your new Choosy poll has been created!</h1>
-      <p><a href="https://chooosy.herokuapp.com/result/${encryptedId}">Click here</a> to track your poll results</p>
-      <p><a href="https://chooosy.herokuapp.com/poll/${publicId}">Share this link</a> to ask your friends, family and/or colleagues to help you be Choosy.</p>
+      <h1>Congratulations! Your new Choosy poll has been created!</h1>
+      <p><a href="https://chooosy.herokuapp.com/result/${encryptedId}">Click here</a> to track your poll results <b>(keep this link secret!)</b>.</p>
+      <p><a href="https://chooosy.herokuapp.com/poll/${publicId}">Share this link</a> to ask your friends, family, and colleagues to help you be Choosy.</p>
       `
   };
   let mail = new MailComposer(data);
