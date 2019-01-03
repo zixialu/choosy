@@ -14,12 +14,12 @@ $(function() {
     let formData = jQuery($pollForm).serializeArray();
     let parsedFormData = {};
 
-    if ($alerPanel.is(':visible')) {
-      $alertPanel.slideUp('slow', function () {
+    if ($alertPanel.is(':visible')) {
+      $alertPanel.slideUp('slow', function() {
         formValidation(formData);
       });
     } else {
-      formValidation(formData)
+      formValidation(formData);
     }
 
     function formValidation(data) {
@@ -30,7 +30,9 @@ $(function() {
         );
       } else if (!data[1].value) {
         $alertPanel.slideToggle();
-        $('#form-alert .panel-body').text('Please insert a valid email address');
+        $('#form-alert .panel-body').text(
+          'Please insert a valid email address'
+        );
       } else {
         parsedFormData[data[0].name] = data[0].value;
         parsedFormData[data[1].name] = data[1].value;
