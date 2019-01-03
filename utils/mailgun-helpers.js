@@ -1,5 +1,5 @@
 // TODO: Move these values into .env
-const api_key = 'f404e6957acba7811ed9226324134cfb-49a2671e-d19101fe';
+const api_key = process.env.MAILGUN_API_KEY;
 const domain = 'sandboxe68219f726034186a6ff2f5cbe3fdc95.mailgun.org';
 
 const mailgun = require('mailgun-js')({ apiKey: api_key, domain: domain });
