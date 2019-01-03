@@ -4,10 +4,8 @@ const uuidv4 = require('uuid/v4');
 const express = require('express');
 const router = express.Router();
 const AES = require('crypto-js/aes');
-const api_key = 'f404e6957acba7811ed9226324134cfb-49a2671e-d19101fe';
-const domain = 'sandboxe68219f726034186a6ff2f5cbe3fdc95.mailgun.org';
-const mailgun = require('mailgun-js')({ apiKey: api_key, domain: domain });
-const MailComposer = require('nodemailer/lib/mail-composer');
+
+const mailgunHelpers = require('../utils/mailgun-helpers');
 
 module.exports = knex => {
   // GET poll creation page
@@ -35,30 +33,11 @@ module.exports = knex => {
             process.env.AES_SECRET_KEY
           );
           res.status(201).send(encodeURIComponent(encryptedId));
-          let data = {
-            from: 'Choosy <umair.abdulq@gmail.com>',
-            to: `${input.email}`,
-            subject: 'Your Choosy Poll!',
-            html: `
-              <h1>Your new Choosy poll has been created!</h1>
-              <p><a href="https://chooosy.herokuapp.com/result/${encryptedId}">Click here</a> to track your poll results</p>
-              <p><a href="https://chooosy.herokuapp.com/poll/${publicId}">Share this link</a> to ask your friends, family and/or colleagues to help you be Choosy.</p>
-              `
-          };
-          let mail = new MailComposer(data);
-
-          mail.compile().build((err, message) => {
-            var dataToSend = {
-              to: `${input.email}`,
-              message: message.toString('ascii')
-            };
-            mailgun.messages().sendMime(dataToSend, (sendError, body) => {
-              if (sendError) {
-                console.log(sendError);
-                return;
-              }
-            });
-          });
+          mailgunHelpers.sendNewPollEmail(
+            input.email,
+            encodeURIComponent(encryptedId),
+            publicId
+          );
         });
       });
     });
