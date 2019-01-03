@@ -43,8 +43,8 @@ app.use(express.static('public'));
 
 // Mount all resource routes
 app.use('/', newPollRoutes);
-app.use('/manage', manageRoutes);
-app.use('/vote', voteRoutes);
+app.use('/result', manageRoutes);
+app.use('/poll', voteRoutes);
 app.use('/404', error404Routes);
 
 // Home page

@@ -12,7 +12,7 @@ module.exports = knex => {
   let pollId;
   let publicId;
 
-  // Manages initial GET request to /manage/:id
+  // Manages initial GET request to /result/:id
   router.get('/:encryptedId', (req, res) => {
     res.render('manage');
   });

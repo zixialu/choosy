@@ -27,7 +27,7 @@ $(document).ready(function() {
   // Ajax request to get the poll data
   $.ajax({
     type: 'get',
-    url: `/manage/api/${pollId}`,
+    url: `/result/api/${pollId}`,
     success: function(data) {
       // Set prompt header
       const $promptHeader = $('.poll-prompt');
@@ -58,7 +58,7 @@ function createChart(data) {
   // Add the public link to the copy input
   const votePath = `${window.location.protocol}//${window.location.hostname}${
     window.location.port ? `:${window.location.port}` : ''
-  }/vote/`;
+  }/poll/`;
   const publicLink = data.parsedPublicId;
   $('#copy-input').attr('value', votePath + publicLink);
 
@@ -151,7 +151,7 @@ function updateData(chart, id) {
   // TODO: Refactor this and the original ajax request to be more DRY
   $.ajax({
     type: 'get',
-    url: `/manage/api/${id}`,
+    url: `/result/api/${id}`,
     success: function(data) {
       // Construct the new data
       // TODO: Refactor this and createChart() to be more DRY

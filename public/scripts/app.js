@@ -50,8 +50,8 @@ $(function() {
           console.log('parsed data', parsedFormData);
           $.post('/', parsedFormData, function(data, status) {
             if (status === 'success') {
-              const managePath = '/manage/';
-              location.href = managePath + data;
+              const resultPath = '/result/';
+              location.href = resultPath + data;
               console.log(location.href);
             }
           });
