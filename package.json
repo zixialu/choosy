@@ -1,7 +1,9 @@
 {
-  "name": "node-skeleton",
+  "name": "choosy",
   "version": "1.0.0",
-  "description": "",
+  "repository": "github:zixialu/choosy",
+  "homepage": "https://github.com/zixialu/choosy#readme",
+  "description": "Create quick, informal polls for your friends to vote on!",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,7 +11,7 @@
     "local": "./node_modules/.bin/nodemon --ignore public/",
     "knex": "./node_modules/.bin/knex"
   },
-  "author": "Lighthouse Labs",
+  "author": "Zixia Lu",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.2",
