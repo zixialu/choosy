@@ -1,6 +1,6 @@
 # Choosy
 
-Create quick, informal polls on the web for your friends to vote on. Votes are tallied using the Borda count and updated live.
+Create quick, informal polls for your friends to vote on! Votes are counted using the Borda count and updated live.
 
 [Visit us on Heroku](https://chooosy.herokuapp.com/)
 
