@@ -61,7 +61,6 @@ module.exports = knex => {
         .where('poll_id', pollId);
     };
 
-    // TODO: Review and refactor this maybe
     const parseData = function(poll, choices, ranks) {
       let parsedPrompt = poll.prompt;
       let parsedChoices = [];
