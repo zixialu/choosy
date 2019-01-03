@@ -10,7 +10,6 @@ const mailgunHelpers = require('../utils/mailgun-helpers');
 module.exports = knex => {
   // GET poll creation page
   router.get('/', (req, res) => {
-    // TODO: Change the file path when it's made
     res.render('index');
   });
 

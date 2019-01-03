@@ -69,11 +69,10 @@ module.exports = knex => {
             });
             // .then(() => {
             Promise.all(promises).then(results => {
-              // TODO: Resolve, maybe redirect to another page
               console.log('Submitted vote!');
               res.status(201).send('Thanks for voting!');
 
-              // TODO: Do we need to send an email for EVERY SINGLE vote?
+              // FIXME: Do we really need to send an email for EVERY vote?
               findEmail(pollerId).then(results => {
                 const encryptedId = AES.encrypt(
                   pollId.toString(),
