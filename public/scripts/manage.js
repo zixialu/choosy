@@ -27,7 +27,7 @@ $(document).ready(function() {
   // Ajax request to get the poll data
   $.ajax({
     type: 'get',
-    url: `/manage/api/${pollId}`,
+    url: `/result/api/${pollId}`,
     success: function(data) {
       // Set prompt header
       const $promptHeader = $('.poll-prompt');
@@ -58,7 +58,7 @@ function createChart(data) {
   // Add the public link to the copy input
   const votePath = `${window.location.protocol}//${window.location.hostname}${
     window.location.port ? `:${window.location.port}` : ''
-  }/vote/`;
+  }/poll/`;
   const publicLink = data.parsedPublicId;
   $('#copy-input').attr('value', votePath + publicLink);
 
@@ -116,8 +116,6 @@ function createChart(data) {
 
         yAxes: [
           {
-            // This constrains bar width
-            // maxBarThickness: 100,
             gridLines: {
               display: false
             }
@@ -133,6 +131,7 @@ function createChart(data) {
         backgroundColor: 'rgba(255, 255, 255, 0.8)',
 
         // The following is the chart.js default font color
+        // TODO: Change to use css font colour
         titleFontColor: '#666666',
         bodyFontColor: '#666666',
         displayColors: false,
@@ -151,7 +150,7 @@ function updateData(chart, id) {
   // TODO: Refactor this and the original ajax request to be more DRY
   $.ajax({
     type: 'get',
-    url: `/manage/api/${id}`,
+    url: `/result/api/${id}`,
     success: function(data) {
       // Construct the new data
       // TODO: Refactor this and createChart() to be more DRY

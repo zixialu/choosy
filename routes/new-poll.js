@@ -41,8 +41,8 @@ module.exports = knex => {
             subject: 'Your Choosy Poll!',
             html: `
               <h1>Your new Choosy poll has been created!</h1>
-              <p><a href="http://localhost:8080/manage/${encryptedId}">Click here</a> to track your poll results</p>
-              <p><a href="http://localhost:8080/vote/${publicId}">Share this link</a> to ask your friends, family and/or colleagues to help you be Choosy.</p>
+              <p><a href="https://chooosy.herokuapp.com/result/${encryptedId}">Click here</a> to track your poll results</p>
+              <p><a href="https://chooosy.herokuapp.com/poll/${publicId}">Share this link</a> to ask your friends, family and/or colleagues to help you be Choosy.</p>
               `
           };
           let mail = new MailComposer(data);

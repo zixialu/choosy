@@ -1,8 +1,8 @@
 $(document).ready(function() {
-  // Make an ajax request to /vote/api to get the poll data
+  // Make an ajax request to /poll/api to get the poll data
   const url = window.location.href;
   const publicId = url.substring(url.lastIndexOf('/') + 1);
-  $.get(`/vote/api/${publicId}`, res => {
+  $.get(`/poll/api/${publicId}`, res => {
     // Insert data into page
     populatePrompt(res.prompt);
     res.pollChoices.forEach(choice => {
@@ -66,10 +66,10 @@ $(document).ready(function() {
 
     $.ajax({
       method: 'PUT',
-      url: `/vote/${publicId}`,
+      url: `/poll/${publicId}`,
       data: { pollChoices: JSON.stringify(pollChoices) }
     }).done(() => {
-      location.href = '/vote/done';
+      location.href = '/poll/done';
     });
   });
 });

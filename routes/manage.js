@@ -12,7 +12,7 @@ module.exports = knex => {
   let pollId;
   let publicId;
 
-  // Manages initial GET request to /manage/:id
+  // Manages initial GET request to /result/:id
   router.get('/:encryptedId', (req, res) => {
     res.render('manage');
   });
@@ -109,36 +109,8 @@ module.exports = knex => {
       votesData = results[1];
       Promise.all(findRanks(results[0])).then(ranks => {
         res.json(parseData(pollData, choicesData, ranks));
-        // .then(result => {
-        // })
       });
-      // .then(result => {
-      // console.log('this is the final ranking output', result);
-      // })
     });
-
-    // .then(findRanks(choicesData))
-    // .then(result => {
-    //   console.log(result)
-    // })
-    // .then(() => {
-    //   Promise.all([findPollChoices(pollId), findVotes(pollId)])
-    //   .then(result => {
-    //     choicesData = result[0]
-    //     votesData = result[1]
-    //   })
-    //   .then(result => {
-    //     findRanks(result[0])
-    //     // .then(result => {
-    //     //   ranksData = result
-    //   })
-    //   .then(console.log({pollData, choicesData, votesData}))
-    // })
-
-    // console.log(Promise.all([findPoll(pollId), findPollChoices(pollId), findVotes(pollId)]))
-    // .then(result => findRanks(result[1]))
-    // .then(res.send({pollData, choicesData, votesData, ranksData}))
-    //: add next steps after data collected from DB
   });
 
   // TODO: POST edit poll
@@ -153,30 +125,4 @@ module.exports = knex => {
   });
 
   return router;
-
-  // for (let x = 0; x < pollChoices.length; x++) {
-  //   return knex
-  //     .sum('rank')
-  //     .from('poll_choices_votes')
-  //     .where('poll_choice_id', pollChoices[x].id)
-  //     .then(result => {
-  //       return parseInt(result[0].sum);
-  //     });
-  // ranksData[pollChoices[x].id] = testVar;
-
-  // console.log('ranksData', ranksData);
-  // console.log("this is the rank outside the for loop", rank)
-  // return rank;
 };
-
-// pollChoices.foreEach(choice => {
-//   return knex
-//     .sum('rank')
-//     .from('poll_choices_votes')
-//     .where('poll_choice_id', choice.id)
-//     .then(result => {
-//       ranksData[choice] = result;
-//     })  // .returning('*')
-// });
-// }
-// };

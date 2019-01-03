@@ -3,6 +3,8 @@
 const express = require('express');
 const router = express.Router();
 const AES = require('crypto-js/aes');
+
+// TODO: Move this into .env
 const api_key = 'f404e6957acba7811ed9226324134cfb-49a2671e-d19101fe';
 const domain = 'sandboxe68219f726034186a6ff2f5cbe3fdc95.mailgun.org';
 const mailgun = require('mailgun-js')({ apiKey: api_key, domain: domain });
@@ -17,7 +19,7 @@ module.exports = knex => {
     res.render('thanks');
   });
 
-  //Manages initial GET request to /vote/:id
+  //Manages initial GET request to /poll/:id
   router.get('/:id', (req, res) => {
     res.render('vote');
   });
@@ -91,7 +93,7 @@ module.exports = knex => {
                   subject: 'Choosy - New Vote!',
                   html: `
                     <h1>You have received a new vote on your Choosy poll!</h1>
-                    <p><a href="http://localhost:8080/manage/${encryptedId}">Click here</a> to see the latest poll results.</p>
+                    <p><a href="https://chooosy.herokuapp.com/result/${encryptedId}">Click here</a> to see the latest poll results.</p>
                     `
                 };
                 let mail = new MailComposer(data);
