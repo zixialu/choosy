@@ -13,6 +13,7 @@
 $white: #ffffff;
 $tomato: #eb2f06;
 $tomato-dark: #d62b06;
+$text-color: #332826;
 
 /*
  * http://www.paulirish.com/2012/box-sizing-border-box-ftw/
@@ -74,7 +75,7 @@ body {
   // Leave room for navbar
   padding-top: 65px;
 
-  // background-color: $tomato;
+  color: $text-color;
 }
 
 .navbar {
@@ -148,6 +149,7 @@ h2 {
   #option-info {
     @extend %merriweather;
     font-weight: 400;
+    opacity: 0.8;
   }
 }
 
