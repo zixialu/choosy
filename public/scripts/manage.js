@@ -36,7 +36,7 @@ $(document).ready(function() {
       rankChart = createChart(data);
     },
     error: function() {
-      // TODO: Redirect to a 404 page
+      // Redirect to a 404 page on error
       console.log('404 redirect');
       location.href = '/404';
     },
@@ -56,7 +56,6 @@ function createChart(data) {
   const $chartCanvas = $('#poll-results');
 
   // Add the public link to the copy input
-  // TODO: Change this for heroku
   const votePath = `${window.location.protocol}//${window.location.hostname}${
     window.location.port ? `:${window.location.port}` : ''
   }/vote/`;
@@ -94,9 +93,9 @@ function createChart(data) {
         {
           label: '% Score',
           data: rankPercentages,
-          backgroundColor: 'rgba(231, 76, 60, 0.7)',
-          hoverBackgroundColor: 'rgba(231, 76, 60, 1.0)',
-          borderColor: 'rgba(231, 76, 60, 1.0)',
+          backgroundColor: '#eb2f06b2',
+          hoverBackgroundColor: '#eb2f06',
+          borderColor: '#eb2f06',
           borderWidth: 1
         }
       ]
