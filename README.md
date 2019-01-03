@@ -4,6 +4,14 @@ Create quick, informal polls for your friends to vote on! Votes are counted usin
 
 [Visit us on Heroku](https://chooosy.herokuapp.com/)
 
+## Screenshots
+
+![Screenshot of landing page](https://raw.githubusercontent.com/zixialu/choosy/master/docs/choosy-new-poll.png)
+
+![Screenshot of voting form](https://raw.githubusercontent.com/zixialu/choosy/master/docs/choosy-vote.png)
+
+![Screenshot of results page](https://raw.githubusercontent.com/zixialu/choosy/master/docs/choosy-results.png)
+
 ## Setting Up the Repo
 
 1. Create the `.env` by using `.env.example` as a reference: `cp .env.example .env`
