@@ -12,8 +12,7 @@
 
 $white: #ffffff;
 $tomato: #eb2f06;
-// $waterfall: #38ada9;
-$waterfall: #88e0dd;
+$tomato-dark: #d62b06;
 
 /*
  * http://www.paulirish.com/2012/box-sizing-border-box-ftw/
@@ -63,9 +62,9 @@ html {
 }
 
 // Media queries for responsive design
-@media (min-width: 768px) {
+@media (min-width: 800px) {
   .container {
-    max-width: 730px;
+    max-width: 800px;
   }
 }
 
@@ -75,23 +74,18 @@ body {
   // Leave room for navbar
   padding-top: 65px;
 
-  background-color: $waterfall;
+  // background-color: $tomato;
 }
 
 .navbar {
-  background: $white;
+  background: linear-gradient($tomato 50%, $tomato-dark);
   border: none;
-  // border-color: #bc422f;
 
   .navbar-brand {
     @extend %merriweather;
     font-size: 18pt;
-    color: $tomato;
+    color: $white;
   }
-}
-
-.jumbotron {
-  // background: $white;
 }
 
 .choosy-style {
