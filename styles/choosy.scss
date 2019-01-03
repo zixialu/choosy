@@ -79,8 +79,8 @@ body {
 }
 
 .navbar {
-  background: linear-gradient($tomato 50%, $tomato-dark);
-  border: none;
+  // background: linear-gradient($tomato 50%, $tomato-dark);
+  // border: none;
 
   .navbar-brand {
     @extend %merriweather;
