@@ -47,11 +47,6 @@ app.use('/result', manageRoutes);
 app.use('/poll', voteRoutes);
 app.use('/404', error404Routes);
 
-// Home page
-// app.get('/', (req, res) => {
-//   res.render('index');
-// });
-
 app.listen(PORT, () => {
   console.log('Example app listening on port ' + PORT);
 });

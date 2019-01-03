@@ -116,8 +116,6 @@ function createChart(data) {
 
         yAxes: [
           {
-            // This constrains bar width
-            // maxBarThickness: 100,
             gridLines: {
               display: false
             }
@@ -133,6 +131,7 @@ function createChart(data) {
         backgroundColor: 'rgba(255, 255, 255, 0.8)',
 
         // The following is the chart.js default font color
+        // TODO: Change to use css font colour
         titleFontColor: '#666666',
         bodyFontColor: '#666666',
         displayColors: false,
