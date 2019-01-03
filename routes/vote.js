@@ -19,7 +19,7 @@ module.exports = knex => {
     res.render('thanks');
   });
 
-  //Manages initial GET request to /vote/:id
+  //Manages initial GET request to /poll/:id
   router.get('/:id', (req, res) => {
     res.render('vote');
   });
