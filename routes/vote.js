@@ -2,10 +2,11 @@
 
 const express = require('express');
 const router = express.Router();
+const AES = require('crypto-js/aes');
 const api_key = 'f404e6957acba7811ed9226324134cfb-49a2671e-d19101fe';
 const domain = 'sandboxe68219f726034186a6ff2f5cbe3fdc95.mailgun.org';
-const mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
-const MailComposer = require('nodemailer/lib/mail-composer')
+const mailgun = require('mailgun-js')({ apiKey: api_key, domain: domain });
+const MailComposer = require('nodemailer/lib/mail-composer');
 
 module.exports = knex => {
   let pollData;
@@ -56,7 +57,7 @@ module.exports = knex => {
           // Insert new pollChoicesVotes
           .then(vote => {
             voteId = vote[0].id;
-          
+
             // Poll choices/votes join table
             const promises = JSON.parse(req.body.pollChoices).map(choice => {
               const { choiceId, rank } = choice;
@@ -69,42 +70,46 @@ module.exports = knex => {
                 .returning('*');
             });
             // .then(() => {
-              Promise.all(promises)
-              .then(results => {
+            Promise.all(promises).then(results => {
               // TODO: Resolve, maybe redirect to another page
-                console.log('Submitted vote!');
-                res.status(201).send('Thanks for voting!');
-                findEmail(pollerId)
-                .then(results => {
-                  //TODO: figure out how to get encrypted ID (ask Zixia)
-                  console.log('these are the results', results)
-                  let email = results[0].email;
-                  let data = {
-                    from: 'Choosy <umair.abdulq@gmail.com>',
-                    to: `${email}`,
-                    subject: 'Choosy - New Vote!',
-                    html: `
+              console.log('Submitted vote!');
+              res.status(201).send('Thanks for voting!');
+
+              // TODO: Do we need to send an email for EVERY SINGLE vote?
+              findEmail(pollerId).then(results => {
+                //TODO: figure out how to get encrypted ID (ask Zixia)
+                const encryptedId = AES.encrypt(
+                  pollId.toString(),
+                  process.env.AES_SECRET_KEY
+                );
+
+                console.log('these are the results', results);
+                let email = results[0].email;
+                let data = {
+                  from: 'Choosy <umair.abdulq@gmail.com>',
+                  to: `${email}`,
+                  subject: 'Choosy - New Vote!',
+                  html: `
                     <h1>You have received a new vote on your Choosy poll!</h1>
                     <p><a href="http://localhost:8080/manage/${encryptedId}">Click here</a> to see the latest poll results.</p>
                     `
-                  }
-                  let mail = new MailComposer(data);
+                };
+                let mail = new MailComposer(data);
 
-                  mail.compile().build((err, message) => {
-                    var dataToSend = {
-                      to: `${input.email}`
-                      message: message.toString('ascii')
-                    };
-                    mailgun.messages().sendMime(dataToSend, (sendError, body) => {
-                      if (sendError) {
-                        console.log(sendError);
-                        return;
-                      }
-                    });
+                mail.compile().build((err, message) => {
+                  var dataToSend = {
+                    to: `${input.email}`,
+                    message: message.toString('ascii')
+                  };
+                  mailgun.messages().sendMime(dataToSend, (sendError, body) => {
+                    if (sendError) {
+                      console.log(sendError);
+                      return;
+                    }
                   });
-                })
-            // });
+                });
               });
+            });
           });
       });
   });
@@ -115,7 +120,6 @@ module.exports = knex => {
   });
 
   return router;
-
 
   function findPoll(publicId) {
     return knex
@@ -149,6 +153,6 @@ module.exports = knex => {
     return knex
       .select('*')
       .from('pollers')
-      .where('id', id)
+      .where('id', id);
   }
 };

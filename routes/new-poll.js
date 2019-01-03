@@ -6,8 +6,8 @@ const router = express.Router();
 const AES = require('crypto-js/aes');
 const api_key = 'f404e6957acba7811ed9226324134cfb-49a2671e-d19101fe';
 const domain = 'sandboxe68219f726034186a6ff2f5cbe3fdc95.mailgun.org';
-const mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
-const MailComposer = require('nodemailer/lib/mail-composer')
+const mailgun = require('mailgun-js')({ apiKey: api_key, domain: domain });
+const MailComposer = require('nodemailer/lib/mail-composer');
 
 module.exports = knex => {
   // GET poll creation page
@@ -25,45 +25,44 @@ module.exports = knex => {
     let pollChoices = [];
     let pollId;
 
-    Promise.resolve(insertPoller())
-    .then(result => {
+    Promise.resolve(insertPoller()).then(result => {
       const pollerId = parseInt(result[0]);
-      insertPoll(pollerId)
-      .then(pollId => {
-        insertPollChoices(parseInt(pollId))
-        .then(() => {
+      insertPoll(pollerId).then(pollId => {
+        insertPollChoices(parseInt(pollId)).then(() => {
           // Using pollId, return encrypted pollId
           const encryptedId = AES.encrypt(
             pollId.toString(),
             process.env.AES_SECRET_KEY
           );
-          res.status(201).send(encodeURIComponent(encryptedId));
-          .then(() => {
-            let data = {
-              from: 'Choosy <umair.abdulq@gmail.com>',
-              to: `${input.email}`,
-              subject: 'Your Choosy Poll!',
-              html: `
+          res
+            .status(201)
+            .send(encodeURIComponent(encryptedId))
+            .then(() => {
+              let data = {
+                from: 'Choosy <umair.abdulq@gmail.com>',
+                to: `${input.email}`,
+                subject: 'Your Choosy Poll!',
+                html: `
               <h1>Your new Choosy poll has been created!</h1>
               <p><a href="http://localhost:8080/manage/${encryptedId}">Click here</a> to track your poll results</p>
               <p><a href="http://localhost:8080/vote/${publicId}">Share this link</a> to ask your friends, family and/or colleagues to help you be Choosy.</p>
               `
-            }
-            let mail = new MailComposer(data);
-
-            mail.compile().build((err, message) => {
-              var dataToSend = {
-                to: `${input.email}`
-                message: message.toString('ascii')
               };
-              mailgun.messages().sendMime(dataToSend, (sendError, body) => {
-                if (sendError) {
-                  console.log(sendError);
-                  return;
-                }
+              let mail = new MailComposer(data);
+
+              mail.compile().build((err, message) => {
+                var dataToSend = {
+                  to: `${input.email}`,
+                  message: message.toString('ascii')
+                };
+                mailgun.messages().sendMime(dataToSend, (sendError, body) => {
+                  if (sendError) {
+                    console.log(sendError);
+                    return;
+                  }
+                });
               });
             });
-          });
         });
       });
     });
