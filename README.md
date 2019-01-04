@@ -33,3 +33,7 @@ Create quick, informal polls for your friends to vote on! Votes are counted usin
 - Node 5.10.x or above
 - NPM 3.8.x or above
 - PostgreSQL 9.5.x or above
+
+## About the Team
+
+Choosy was created by [Edward Yang](https://github.com/edwardcode), [Umair Abdul](https://github.com/uabdul), and [Zixia Lu](https://github.com/zixialu) for Lighthouse Labs' Decision Maker midterm project.
